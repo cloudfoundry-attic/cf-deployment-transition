@@ -4,7 +4,7 @@ pushd $(dirname $0) > /dev/null
 root_dir=$PWD
   pushd $(mktemp -d) > /dev/null
 
-    ${root_dir}/transition.sh \
+    ${root_dir}/../transition.sh \
       -cf ${root_dir}/fixture/source-cf-manifest.yml \
       -d ${root_dir}/fixture/source-diego-manifest.yml \
       -ca ${root_dir}/fixture/ca-private-keys.yml > /dev/null

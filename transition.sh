@@ -115,7 +115,7 @@ function check_ca_private_keys() {
   # There is likely a more elegant way to do this.  Our first pass is to just
   # cat std_err from Spiff out to a temp file so we can grep over it.
 cat > $spiff_temp_output <<EOF
-$(spiff merge $SCRIPT_DIR/vars-ca-template.yml $CA_KEYS 2>&1 >/dev/null)
+$(spiff merge $SCRIPT_DIR/templates/vars-ca-template.yml $CA_KEYS 2>&1 >/dev/null)
 EOF
 
   # If there is no error output to look at, then Spiff is saying we're good to
@@ -166,9 +166,9 @@ function spiff_it() {
   extract_uaa_jwt_value "${uaa_jwt_spiff_template}"
 
   spiff merge \
-  $SCRIPT_DIR/vars-store-template.yml \
-  $SCRIPT_DIR/vars-pre-processing-template.yml \
-  $SCRIPT_DIR/vars-ca-template.yml \
+  $SCRIPT_DIR/templates/vars-store-template.yml \
+  $SCRIPT_DIR/templates/vars-pre-processing-template.yml \
+  $SCRIPT_DIR/templates/vars-ca-template.yml \
   $CF_MANIFEST \
   $DIEGO_MANIFEST \
   $CA_KEYS \

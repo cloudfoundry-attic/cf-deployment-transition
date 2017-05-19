@@ -3,7 +3,7 @@
 fail_required_keys=0
 fail_filling_in=0
 pushd $(dirname $0) > /dev/null
-  spiff merge vars-ca-template.yml 2&> /dev/null
+  spiff merge ../templates/vars-ca-template.yml 2&> /dev/null
   if [ "$?" == "1" ]; then
     echo PASS - the ca template requires filling in keys
   else
@@ -11,7 +11,7 @@ pushd $(dirname $0) > /dev/null
     echo FAIL - the ca template requires filling in keys
   fi
 
-  spiff merge vars-ca-template.yml fixture/ca-private-keys.yml > /dev/null
+  spiff merge ../templates/vars-ca-template.yml fixture/ca-private-keys.yml > /dev/null
   if [ "$?" == "0" ]; then
     echo PASS - the ca template can be filled completely with keys
   else
