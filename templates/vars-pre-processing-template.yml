@@ -286,9 +286,3 @@ properties:
     route_services_secret: (( merge || nil ))
     status:
       password: (( merge || nil ))
-  cf_networking:
-    policy_server:
-      ca_cert: (( merge ))
-      server_cert: (( merge ))
-      server_key: (( merge ))
-      uaa_client_secret: (( merge ))

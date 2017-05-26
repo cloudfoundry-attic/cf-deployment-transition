@@ -2,8 +2,7 @@
 
 DESCRIBE="Unhappy path"
   examples_failed=0
-  root_dir=$PWD
-  pushd $(dirname $0) > /dev/null
+  root_dir=$(dirname $0)
 
 # Tests
 IT="exits 1 with a helpful message if no CA keys are specified"
@@ -107,10 +106,6 @@ function be_smart_about_cf_networking() {
 
   exit_code=$?
 
-  # echo " **** "
-  # echo "$error_output"
-  # echo " **** "
-
   IT="exits 1 if network-related properties are missing when -N is supplied"
     if [ "$exit_code" == "1" ]; then
       echo PASS - ${IT} - $required_property
@@ -132,43 +127,16 @@ be_smart_about_cf_networking "policy_server_cert" "policy_server.server_cert"
 be_smart_about_cf_networking "policy_server_key" "policy_server.server_key"
 be_smart_about_cf_networking "policy_server_uaa_client_secret" "policy_server.uaa_client_secret"
 
-# be_smart_about_cf_networking "silk_controller_ca_cert" "bleh"
-# be_smart_about_cf_networking "silk_controller_server_cert" "bleh"
-# be_smart_about_cf_networking "silk_controller_server_key" "bleh"
-# be_smart_about_cf_networking "silk_daemon_ca_cert" "bleh"
-# be_smart_about_cf_networking "silk_daemon_client_cert" "bleh"
-# be_smart_about_cf_networking "silk_daemon_client_key" "bleh"
+be_smart_about_cf_networking "silk_controller_ca_cert" "silk_controller.ca_cert"
+be_smart_about_cf_networking "silk_controller_server_cert" "silk_controller.server_cert"
+be_smart_about_cf_networking "silk_controller_server_key" "silk_controller.server_key"
+be_smart_about_cf_networking "silk_daemon_ca_cert" "silk_daemon.ca_cert"
+be_smart_about_cf_networking "silk_daemon_client_cert" "silk_daemon.client_cert"
+be_smart_about_cf_networking "silk_daemon_client_key" "silk_daemon.client_key"
 
-# be_smart_about_cf_networking "vxlan_policy_agent_ca_cert" "bleh"
-# be_smart_about_cf_networking "vxlan_policy_agent_client_cert" "bleh"
-# be_smart_about_cf_networking "vxlan_policy_agent_client_key" "bleh"
-
-# IT="can extract network properties when -N is supplied"
-#   ${root_dir}/../transition.sh \
-#     -cf ${root_dir}/fixture/source-cf-manifest.yml \
-#     -N \
-#     -d ${root_dir}/fixture/source-diego-manifest.yml  > /dev/null
-#   if [ "$?" == "1" ]; then
-#     echo PASS - ${IT}
-#   else
-#     examples_failed=1
-#     echo FAIL - ${IT}
-#   fi
-
-# IT="can be filled with CA keys"
-#   ${root_dir}/../transition.sh \
-#     -cf ${root_dir}/fixture/source-cf-manifest.yml \
-#     -d ${root_dir}/fixture/source-diego-manifest.yml \
-#     -ca ${root_dir}/fixture/ca-private-keys.yml > /dev/null
-#   if [ "$?" == "0" ]; then
-#     echo PASS - ${IT}
-#   else
-#     examples_failed=1
-#     echo FAIL - ${IT}
-#   fi
-
-# Shared Cleanup
-popd > /dev/null
+be_smart_about_cf_networking "vxlan_policy_agent_ca_cert" "vxlan_policy_agent.ca_cert"
+be_smart_about_cf_networking "vxlan_policy_agent_client_cert" "vxlan_policy_agent.client_cert"
+be_smart_about_cf_networking "vxlan_policy_agent_client_key" "vxlan_policy_agent.client_key"
 
 # "test framework" exit code matching/reporting
 if [[ "${examples_failed}" > 0 ]]; then

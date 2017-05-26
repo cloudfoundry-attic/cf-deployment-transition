@@ -1,0 +1,19 @@
+properties:
+  cf_networking:
+    policy_server:
+      ca_cert: (( merge ))
+      server_cert: (( merge ))
+      server_key: (( merge ))
+      uaa_client_secret: (( merge ))
+    silk_controller:
+      ca_cert: (( merge ))
+      server_cert: (( merge ))
+      server_key: (( merge ))
+    silk_daemon:
+      ca_cert: (( merge ))
+      client_cert: (( merge ))
+      client_key: (( merge ))
+    vxlan_policy_agent:
+      ca_cert: (( merge ))
+      client_cert: (( merge ))
+      client_key: (( merge ))

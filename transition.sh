@@ -97,6 +97,9 @@ function parse_args() {
       DIEGO_MANIFEST="$2"
       shift # past argument
       ;;
+      -N|--cf-networking)
+      CF_NETWORKING=true
+      ;;
       -h|--help)
       help
       exit 0
@@ -165,9 +168,14 @@ function spiff_it() {
 
   extract_uaa_jwt_value "${uaa_jwt_spiff_template}"
 
+  PRE_PROCESSING_TEMPLATE="$SCRIPT_DIR/templates/vars-pre-processing-template.yml"
+  if [ -n "${CF_NETWORKING}" ]; then
+    PRE_PROCESSING_TEMPLATE="$SCRIPT_DIR/templates/vars-pre-processing-cf-networking-template.yml"
+  fi
+
   spiff merge \
   $SCRIPT_DIR/templates/vars-store-template.yml \
-  $SCRIPT_DIR/templates/vars-pre-processing-template.yml \
+  $PRE_PROCESSING_TEMPLATE \
   $SCRIPT_DIR/templates/vars-ca-template.yml \
   $CF_MANIFEST \
   $DIEGO_MANIFEST \
