@@ -1,0 +1,25 @@
+uaa_clients_network_policy_secret: policy_server_uaa_client_secret
+network_policy_ca:
+  ca: policy_server_ca_cert
+  certificate: policy_server_ca_cert
+  private_key: policy_server_ca_key
+network_policy_server:
+  ca: policy_server_ca_cert
+  certificate: policy_server_cert
+  private_key: policy_server_key
+network_policy_client:
+  ca: vxlan_policy_agent_ca_cert
+  certificate: vxlan_policy_agent_client_cert
+  private_key: vxlan_policy_agent_client_key
+silk_ca:
+  ca: silk_controller_ca_cert
+  certificate: silk_controller_ca_cert
+  private_key: silk_controller_ca_key
+silk_daemon:
+  ca: silk_controller_ca_cert
+  certificate: silk_daemon_client_cert
+  private_key: silk_daemon_client_key
+silk_controller:
+  ca: silk_controller_ca_cert
+  certificate: silk_controller_server_cert
+  private_key: silk_controller_server_key
