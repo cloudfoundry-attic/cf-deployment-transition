@@ -138,9 +138,10 @@ be_smart_about_cf_networking "vxlan_policy_agent_ca_cert" "vxlan_policy_agent.ca
 be_smart_about_cf_networking "vxlan_policy_agent_client_cert" "vxlan_policy_agent.client_cert"
 be_smart_about_cf_networking "vxlan_policy_agent_client_key" "vxlan_policy_agent.client_key"
 
-DESCRIBE="CF networking private keys"
+CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)
   grep -v policy_server_ca_key < ${root_dir}/fixture/ca-private-keys.yml > ${missing_a_private_key}
+  echo "${CONTEXT}:"
   error_output="$(${root_dir}/../transition.sh \
     -cf ${root_dir}/fixture/source-cf-manifest.yml \
     -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
