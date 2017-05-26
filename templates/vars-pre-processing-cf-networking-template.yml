@@ -17,3 +17,9 @@ properties:
       ca_cert: (( merge ))
       client_cert: (( merge ))
       client_key: (( merge ))
+
+from_user:
+  policy_server_ca:
+    private_key: (( merge ))
+  silk_ca:
+    private_key: (( merge ))

@@ -138,6 +138,31 @@ be_smart_about_cf_networking "vxlan_policy_agent_ca_cert" "vxlan_policy_agent.ca
 be_smart_about_cf_networking "vxlan_policy_agent_client_cert" "vxlan_policy_agent.client_cert"
 be_smart_about_cf_networking "vxlan_policy_agent_client_key" "vxlan_policy_agent.client_key"
 
+DESCRIBE="CF networking private keys"
+  missing_a_private_key=$(mktemp)
+  grep -v policy_server_ca_key < ${root_dir}/fixture/ca-private-keys.yml > ${missing_a_private_key}
+  error_output="$(${root_dir}/../transition.sh \
+    -cf ${root_dir}/fixture/source-cf-manifest.yml \
+    -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
+    -ca ${missing_a_private_key} \
+    -N 2>&1 > /dev/null)"
+
+  exit_code=$?
+  IT="should require private keys for cf networking CAs when -N is specified"
+    if [ "$exit_code" == "1" ]; then
+      echo PASS - ${IT} - policy_server_ca_key
+    else
+      examples_failed=1
+      echo FAIL - ${IT} - policy_server_ca_key
+    fi
+  IT="should have a helpful message when private keys for cf networking CAs are missing"
+    if echo "${error_output}" | grep -q -e "policy_server_ca.private_key" ; then
+      echo PASS - ${IT} - policy_server_ca_key
+    else
+      examples_failed=1
+      echo FAIL - ${IT} - policy_server_ca_key
+    fi
+
 # "test framework" exit code matching/reporting
 if [[ "${examples_failed}" > 0 ]]; then
   echo ${DESCRIBE} FAILED!
