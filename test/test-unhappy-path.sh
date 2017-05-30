@@ -85,7 +85,7 @@ IT="has a helpful message if any CA keys are missing"
   done
 
 
-function be_smart_about_cf_networking() {
+function test_cf_networking_variable_extraction() {
   local required_property
   required_property="${1}"
 
@@ -122,21 +122,21 @@ function be_smart_about_cf_networking() {
     fi
 }
 
-be_smart_about_cf_networking "policy_server_ca_cert" "policy_server.ca_cert"
-be_smart_about_cf_networking "policy_server_cert" "policy_server.server_cert"
-be_smart_about_cf_networking "policy_server_key" "policy_server.server_key"
-be_smart_about_cf_networking "policy_server_uaa_client_secret" "policy_server.uaa_client_secret"
+test_cf_networking_variable_extraction "policy_server_ca_cert" "policy_server.ca_cert"
+test_cf_networking_variable_extraction "policy_server_cert" "policy_server.server_cert"
+test_cf_networking_variable_extraction "policy_server_key" "policy_server.server_key"
+test_cf_networking_variable_extraction "policy_server_uaa_client_secret" "policy_server.uaa_client_secret"
 
-be_smart_about_cf_networking "silk_controller_ca_cert" "silk_controller.ca_cert"
-be_smart_about_cf_networking "silk_controller_server_cert" "silk_controller.server_cert"
-be_smart_about_cf_networking "silk_controller_server_key" "silk_controller.server_key"
-be_smart_about_cf_networking "silk_daemon_ca_cert" "silk_daemon.ca_cert"
-be_smart_about_cf_networking "silk_daemon_client_cert" "silk_daemon.client_cert"
-be_smart_about_cf_networking "silk_daemon_client_key" "silk_daemon.client_key"
+test_cf_networking_variable_extraction "silk_controller_ca_cert" "silk_controller.ca_cert"
+test_cf_networking_variable_extraction "silk_controller_server_cert" "silk_controller.server_cert"
+test_cf_networking_variable_extraction "silk_controller_server_key" "silk_controller.server_key"
+test_cf_networking_variable_extraction "silk_daemon_ca_cert" "silk_daemon.ca_cert"
+test_cf_networking_variable_extraction "silk_daemon_client_cert" "silk_daemon.client_cert"
+test_cf_networking_variable_extraction "silk_daemon_client_key" "silk_daemon.client_key"
 
-be_smart_about_cf_networking "vxlan_policy_agent_ca_cert" "vxlan_policy_agent.ca_cert"
-be_smart_about_cf_networking "vxlan_policy_agent_client_cert" "vxlan_policy_agent.client_cert"
-be_smart_about_cf_networking "vxlan_policy_agent_client_key" "vxlan_policy_agent.client_key"
+test_cf_networking_variable_extraction "vxlan_policy_agent_ca_cert" "vxlan_policy_agent.ca_cert"
+test_cf_networking_variable_extraction "vxlan_policy_agent_client_cert" "vxlan_policy_agent.client_cert"
+test_cf_networking_variable_extraction "vxlan_policy_agent_client_key" "vxlan_policy_agent.client_key"
 
 CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)
