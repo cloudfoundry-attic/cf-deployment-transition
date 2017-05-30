@@ -156,13 +156,13 @@ function spiff_it() {
   extract_uaa_jwt_value "${uaa_jwt_spiff_template}"
 
   if [ -n "${CF_NETWORKING}" ]; then
-    CF_NETWORKING_ADDITIONS="$SCRIPT_DIR/templates/vars-pre-processing-cf-networking-template.yml"
+    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-cf-networking-template.yml $SCRIPT_DIR/templates/vars-pre-processing-cf-networking-template.yml"
+  else
+    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-template.yml $SCRIPT_DIR/templates/vars-pre-processing-template.yml"
   fi
 
   spiff merge \
-  $SCRIPT_DIR/templates/vars-store-template.yml \
-  $SCRIPT_DIR/templates/vars-pre-processing-template.yml \
-  $CF_NETWORKING_ADDITIONS \
+  $MERGE_TEMPLATES \
   $SCRIPT_DIR/templates/vars-ca-template.yml \
   $CF_MANIFEST \
   $DIEGO_MANIFEST \

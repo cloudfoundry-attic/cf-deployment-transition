@@ -42,16 +42,13 @@ DESCRIBE="When on the happy journey"
 
   IT="makes a cf-networking vars store from source manifests"
     pushd $(mktemp -d) > /dev/null
-      spiff merge ${root_dir}/fixture/expected-vars-store.yml \
-        ${root_dir}/fixture/expected-cf-networking-vars.yml > expected-vars-store.yml
-
       ${root_dir}/../transition.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
         -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
         -ca ${root_dir}/fixture/source-ca-private-keys-cf-networking.yml \
         -N > /dev/null
 
-      diff -wB -C5 expected-vars-store.yml deployment-vars.yml
+      diff -wB -C5 ${root_dir}/fixture/expected-cf-networking-vars.yml deployment-vars.yml
       status=$?
 
       if [ "$status" == "0" ]; then
