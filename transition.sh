@@ -174,16 +174,18 @@ function handle_spiff_errors() {
   set +e
   spiff_temp_output=$(mktemp)
   # spiff_it > /dev/null
-  spiff_it 2> $spiff_temp_output
+  spiff_it 1> /dev/null 2> $spiff_temp_output
   set -e
-  if [ $(cat $spiff_temp_output | wc -l) > 0 ]; then
-    prettify_spiff_errors $spiff_temp_output
-    cat $spiff_temp_output > /dev/stderr
-    exit 1
-  else
+  echo $spiff_temp_output
+  cat $spiff_temp_output
+  if [ $(cat $spiff_temp_output | wc -l) == 0 ]; then
     spiff_it > deployment-vars.yml
     echo -e "${GREEN}Merge successful!${NC}"
     echo "Please find your new vars store file in $PWD/deployment-vars.yml"
+  else
+    prettify_spiff_errors $spiff_temp_output
+    cat $spiff_temp_output > /dev/stderr
+    exit 1
   fi
 }
 
