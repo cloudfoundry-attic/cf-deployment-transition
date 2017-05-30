@@ -62,6 +62,7 @@ function check_params() {
   else
     error_message="$error_message CF manifest required."
   fi
+
   if [[ -f $DIEGO_MANIFEST ]]; then
     diego_manifest=true
   else
