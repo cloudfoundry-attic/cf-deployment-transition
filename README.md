@@ -94,12 +94,110 @@ to be used when deploying using `cf-deployment`
 for the first time
 while targeting an existing `cf-release`-based deployment.
 
-It should be used after all other appropriate ops-files
+It should be applied after
+all other appropriate ops-files
 and in conjunction with the ops-file
 to scale down etcd for cluster changes.
 
 This section will be updated with better instructions
 as our support for the transition process improves.
+
+### Prerequisites
+To migrate to cf-deployment
+with the tools and process we've designed and tested
+so far,
+you'll need to fulfill a number of requirements:
+- you have existing deployments of
+  `cf-release`
+  and
+  `diego-release` on AWS.
+- you've got TLS enabled and configured correctly
+  (this is discussed in some length in the next section)
+- your databases and blobstores are external to your cf-release deployment
+  (for example, your database could be in a separate database deployment, or a service like RDS).
+
+The following sections discuss these prerequisites
+and their relationships to our tools
+in more depth.
+
+Our tests and tooling
+assume you are migrating an AWS environment.
+If you have a different IaaS in production
+and you'd like to migrate it,
+we'd love to hear from you!
+Please open an issue describing your situation.
+
+#### Required TLS Certificate Topology
+It is important to note that TLS validation
+is enabled throughout `cf-deployment`.
+This configuration may be more strict
+about TLS configuration
+than configurations based on `cf-release` were.
+
+We assume you are using self-signed certificates
+for internal TLS communication.
+This requires configuring jobs
+to trust the certificate authorities
+used to sign one another's certs.
+Getting these relationships right is complicated,
+and there is more than one possible working arrangement.
+`cf-deployment` expects a particular arrangement,
+documented below.
+If you have a different certificate topology,
+you'll need to either migrate to ours,
+or manage the transition on your own.
+
+This is a list of Certificate Authorities
+with indented lists of certificates
+that must share an authority.
+More-shared/permissive topologies will also work
+as long as all members of the sub-lists share CAs.
+
+- etcd-ca
+  - etcd_server
+  - etcd_client
+- etcd_peer_ca
+  - etcd_peer
+- consul_agent_ca
+  - consul_server
+  - consul_agent
+- service_cf_internal_ca
+  - blobstore_tls
+  - diego_auctioneer_client
+  - diego_auctioneer_server
+  - diego_bbs_server
+  - diego_rep_client
+  - diego_rep_agent
+  - cc_tls
+  - cc_bridge_tps
+  - cc_bridge_cc_uploader
+  - cc_bridge_cc_uploader_server
+- loggregator_ca
+  - loggregator_tls_statsdinjector
+  - loggregator_tls_metron
+  - loggregator_tls_syslogdrainbinder
+- router_ca
+  - router_ssl
+- uaa_ca
+  - uaa_ssl
+  - uaa_login_saml
+
+#### Required Database and Blobstore Configuration
+Our tools assume
+an external S3 blobstore
+and an external AWS RDS database.
+
+The transition deployment assumes
+and requires
+the use of the `use-external-dbs.yml`
+and `use-s3-blobstore.yml` ops files.
+Those ops files require a number of variables
+be provided in vars-files,
+as [documented][cf-d-ops-files-list] in the `cf-deployment` readme.
+
+You will need to manually extract and specify
+the configuration details
+for your external persistence providers.
 
 ### Tests and Contributions
 We're happy to accept feedback
@@ -110,4 +208,4 @@ with `transition/test-suite.sh`,
 and update the fixtures appropriately.
 
 [spiff-releases]: https://github.com/cloudfoundry-incubator/spiff/releases
-
+[cf-d-ops-files-list]: https://github.com/cloudfoundry/cf-deployment/blob/master/README.md#ops-files
