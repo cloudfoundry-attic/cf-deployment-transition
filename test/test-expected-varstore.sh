@@ -59,6 +59,45 @@ DESCRIBE="When on the happy journey"
       fi
     popd > /dev/null
 
+  IT="makes a routing vars store from source manifests"
+    pushd $(mktemp -d) > /dev/null
+      ${root_dir}/../transition.sh \
+        -cf ${root_dir}/fixture/source-cf-manifest-with-routing.yml \
+        -d  ${root_dir}/fixture/source-diego-manifest.yml \
+        -ca ${root_dir}/fixture/ca-private-keys.yml \
+        -r > /dev/null
+
+      diff -wB -C5 ${root_dir}/fixture/expected-routing-vars.yml deployment-vars.yml
+      status=$?
+
+      if [ "$status" == "0" ]; then
+        echo PASS - ${IT}
+      else
+        echo FAIL - ${IT}
+        examples_failed=1
+      fi
+    popd > /dev/null
+
+  IT="makes a cf-networking and routing vars store from source manifests"
+    pushd $(mktemp -d) > /dev/null
+      ${root_dir}/../transition.sh \
+        -cf ${root_dir}/fixture/source-cf-manifest-with-routing.yml \
+        -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
+        -ca ${root_dir}/fixture/source-ca-private-keys-cf-networking.yml \
+        -N \
+        -r > /dev/null
+
+      diff -wB -C5 ${root_dir}/fixture/expected-cf-networking-and-routing-vars.yml deployment-vars.yml
+      status=$?
+
+      if [ "$status" == "0" ]; then
+        echo PASS - ${IT}
+      else
+        echo FAIL - ${IT}
+        examples_failed=1
+      fi
+    popd > /dev/null
+
 if [[ "${examples_failed}" > 0 ]]; then
   echo ${DESCRIBE} FAILED!
   exit 1

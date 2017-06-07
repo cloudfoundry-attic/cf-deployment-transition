@@ -14,6 +14,9 @@ function help() {
   echo -e "   ${GREEN}-cf, --cf-manifest${NC}     Path to your existing Cloud Foundry Manifest"
   echo -e "   ${GREEN}-d,  --diego-manifest${NC}  Path to your existiong Diego Manifest"
   echo -e "   ${GREEN}-h,  --help${NC}            Print this here message"
+  echo "  optional arguments:"
+  echo -e "   ${GREEN}-N,  --cf-networking${NC}   Flag to extract cf-networking creds from the Diego Manifest"
+  echo -e "   ${GREEN}-r,  --routing${NC}      Flag to extract routing deployment creds from the Cloud Foundry Manifest"
 }
 
 function ca_key_stub_help() {
@@ -101,6 +104,9 @@ function parse_args() {
       -N|--cf-networking)
       CF_NETWORKING=true
       ;;
+      -r|--routing)
+      ROUTING=true
+      ;;
       -h|--help)
       help
       exit 0
@@ -155,8 +161,12 @@ function spiff_it() {
 
   extract_uaa_jwt_value "${uaa_jwt_spiff_template}"
 
-  if [ -n "${CF_NETWORKING}" ]; then
+  if [ -n "${CF_NETWORKING}" ] && [ -n "${ROUTING}" ]; then
+    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-cf-networking-and-routing-template.yml $SCRIPT_DIR/templates/vars-pre-processing-cf-networking-and-routing-template.yml"
+  elif [ -n "${CF_NETWORKING}" ]; then
     MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-cf-networking-template.yml $SCRIPT_DIR/templates/vars-pre-processing-cf-networking-template.yml"
+  elif [ -n "${ROUTING}" ]; then
+    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-routing-template.yml $SCRIPT_DIR/templates/vars-pre-processing-routing-template.yml"
   else
     MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-template.yml $SCRIPT_DIR/templates/vars-pre-processing-template.yml"
   fi

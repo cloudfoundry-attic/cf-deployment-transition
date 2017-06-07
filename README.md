@@ -16,6 +16,9 @@ usage: transition.sh [required arguments]
     -ca, --ca-keys         Path to your created CA Keys file
     -cf, --cf-manifest     Path to your existing Cloud Foundry Manifest
     -d,  --diego-manifest  Path to your existing Diego Manifest
+  optional arguments:
+    -N,  --cf-networking   Flag to extract cf-networking creds from the Diego Manifest
+    -r,  --routing         Flag to extract routing deployment creds from the Cloud Foundry Manifest
 ```
 This is intended to result
 in a vars-store file you can use

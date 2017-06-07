@@ -179,8 +179,6 @@ uaa_clients_doppler_secret: uaa-doppler-secret
 uaa_clients_gorouter_secret: uaa-router-secret
 uaa_clients_network_policy_secret: policy_server_uaa_client_secret
 uaa_clients_ssh-proxy_secret: uaa-ssh-secret
-uaa_clients_tcp_emitter_secret: uaa-emitter-secret
-uaa_clients_tcp_router_secret: uaa-tcp-secret
 uaa_database_password: uaadb-password
 uaa_jwt_signing_key:
   private_key: |+

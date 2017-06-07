@@ -138,6 +138,36 @@ test_cf_networking_variable_extraction "vxlan_policy_agent_ca_cert" "vxlan_polic
 test_cf_networking_variable_extraction "vxlan_policy_agent_client_cert" "vxlan_policy_agent.client_cert"
 test_cf_networking_variable_extraction "vxlan_policy_agent_client_key" "vxlan_policy_agent.client_key"
 
+function test_routing_deployment_variable_extraction() {
+  local required_property
+  required_property="${1}"
+
+  local missing_a_property
+  missing_a_property=$(mktemp)
+  grep -v $required_property ${root_dir}/fixture/source-cf-manifest-with-routing.yml > $missing_a_property
+
+  local exit_code
+  local error_output
+  error_output="$(${root_dir}/../transition.sh \
+    -cf $missing_a_property \
+    -d  ${root_dir}/fixture/source-diego-manifest.yml \
+    -ca ${root_dir}/fixture/ca-private-keys.yml \
+    -N 2>&1 > /dev/null)"
+
+  exit_code=$?
+  IT="exits 1 if routing-related properties are missing when -r is supplied"
+    if [ "$exit_code" == "1" ]; then
+      echo PASS - ${IT} - $required_property
+    else
+      examples_failed=1
+      echo FAIL - ${IT} - $required_property
+    fi
+}
+
+test_routing_deployment_variable_extraction "uaa_clients_tcp_emitter_secret"
+test_routing_deployment_variable_extraction "uaa_clients_tcp_router_secret"
+test_routing_deployment_variable_extraction "uaa_clients_routing_api_client_secret"
+
 CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)
   grep -v policy_server_ca_key < ${root_dir}/fixture/ca-private-keys.yml > ${missing_a_private_key}
@@ -163,6 +193,7 @@ CONTEXT="CF networking private keys"
       examples_failed=1
       echo FAIL - ${IT} - policy_server_ca_key
     fi
+
 
 # "test framework" exit code matching/reporting
 if [[ "${examples_failed}" > 0 ]]; then

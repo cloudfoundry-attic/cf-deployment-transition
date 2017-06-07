@@ -36,8 +36,14 @@ properties:
         secret: uaa-doppler-secret
       gorouter:
         secret: uaa-router-secret
+      routing_api:
+        secret: uaa-routing-api-secret
       ssh-proxy:
         secret: uaa-ssh-secret
+      tcp_emitter:
+        secret: uaa-emitter-secret
+      tcp_router:
+        secret: uaa-tcp-secret
     jwt:
       policy:
         active_key_id: key-1

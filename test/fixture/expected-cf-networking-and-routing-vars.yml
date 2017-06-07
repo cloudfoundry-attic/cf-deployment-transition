@@ -136,12 +136,36 @@ loggregator_tls_tc:
   certificate: tc-cert
   private_key: tc-key
 nats_password: steve-nats
+network_policy_ca:
+  ca: policy_server_ca_cert
+  certificate: policy_server_ca_cert
+  private_key: policy-server-ca-private-key
+network_policy_client:
+  ca: vxlan_policy_agent_ca_cert
+  certificate: vxlan_policy_agent_client_cert
+  private_key: vxlan_policy_agent_client_key
+network_policy_server:
+  ca: policy_server_ca_cert
+  certificate: policy_server_cert
+  private_key: policy_server_key
 router_route_services_secret: router-secret
 router_status_password: router-status-password
 service_cf_internal_ca:
   ca: service-cf-internal-ca-cert
   certificate: service-cf-internal-ca-cert
   private_key: service-cf-internal-ca-key
+silk_ca:
+  ca: silk_controller_ca_cert
+  certificate: silk_controller_ca_cert
+  private_key: silk-ca-private-key
+silk_controller:
+  ca: silk_controller_ca_cert
+  certificate: silk_controller_server_cert
+  private_key: silk_controller_server_key
+silk_daemon:
+  ca: silk_daemon_ca_cert
+  certificate: silk_daemon_client_cert
+  private_key: silk_daemon_client_key
 system_domain: some-domain.cf-app.com
 uaa_admin_client_secret: uaa-admin-secret
 uaa_ca:
@@ -153,7 +177,11 @@ uaa_clients_cc-service-dashboards_secret: uaa-cc-service-secret
 uaa_clients_cloud_controller_username_lookup_secret: uaa-cc-secret
 uaa_clients_doppler_secret: uaa-doppler-secret
 uaa_clients_gorouter_secret: uaa-router-secret
+uaa_clients_network_policy_secret: policy_server_uaa_client_secret
+uaa_clients_routing_api_client_secret: uaa-routing-api-secret
 uaa_clients_ssh-proxy_secret: uaa-ssh-secret
+uaa_clients_tcp_emitter_secret: uaa-emitter-secret
+uaa_clients_tcp_router_secret: uaa-tcp-secret
 uaa_database_password: uaadb-password
 uaa_jwt_signing_key:
   private_key: |+

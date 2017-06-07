@@ -121,7 +121,10 @@ uaa_clients_cc-service-dashboards_secret: (( properties.uaa.clients.cc-service-d
 uaa_clients_cloud_controller_username_lookup_secret: (( properties.uaa.clients.cloud_controller_username_lookup.secret ))
 uaa_clients_doppler_secret: (( properties.uaa.clients.doppler.secret ))
 uaa_clients_gorouter_secret: (( properties.uaa.clients.gorouter.secret ))
+uaa_clients_routing_api_client_secret: (( properties.uaa.clients.routing_api.secret ))
 uaa_clients_ssh-proxy_secret: (( properties.uaa.clients.ssh-proxy.secret ))
+uaa_clients_tcp_emitter_secret: (( properties.uaa.clients.tcp_emitter.secret ))
+uaa_clients_tcp_router_secret: (( properties.uaa.clients.tcp_router.secret ))
 uaa_database_password: (( properties.uaadb.roles.[0].password ))
 uaa_jwt_signing_key:
   private_key: (( merge ))
@@ -200,7 +203,13 @@ properties:
         secret: (( merge || nil ))
       gorouter:
         secret: (( merge || nil ))
+      routing_api:
+        secret: (( merge || nil ))
       ssh-proxy:
+        secret: (( merge || nil ))
+      tcp_emitter:
+        secret: (( merge || nil ))
+      tcp_router:
         secret: (( merge || nil ))
   uaadb:
     roles:
