@@ -142,6 +142,9 @@ function test_routing_deployment_variable_extraction() {
   local required_property
   required_property="${1}"
 
+  local error_message
+  error_message="${2}"
+
   local missing_a_property
   missing_a_property=$(mktemp)
   grep -v $required_property ${root_dir}/fixture/source-cf-manifest-with-routing.yml > $missing_a_property
@@ -162,11 +165,18 @@ function test_routing_deployment_variable_extraction() {
       examples_failed=1
       echo FAIL - ${IT} - $required_property
     fi
+  IT="has a helpful message if routing-related properties are missing when -r is supplied"
+    if echo "${error_output}" | grep -q -e $error_message ; then
+      echo PASS - ${IT} - $required_property
+    else
+      examples_failed=1
+      echo FAIL - ${IT} - $required_property
+    fi
 }
 
-test_routing_deployment_variable_extraction "uaa_clients_tcp_emitter_secret"
-test_routing_deployment_variable_extraction "uaa_clients_tcp_router_secret"
-test_routing_deployment_variable_extraction "uaa_clients_routing_api_client_secret"
+test_routing_deployment_variable_extraction "uaa_clients_tcp_emitter_secret" "uaa_clients_tcp_emitter_secret"
+test_routing_deployment_variable_extraction "uaa_clients_tcp_router_secret" "uaa_clients_tcp_router_secret"
+test_routing_deployment_variable_extraction "uaa_clients_routing_api_client_secret" "uaa_clients_routing_api_client_secret"
 
 CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)

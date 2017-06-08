@@ -179,13 +179,13 @@ properties:
       gorouter:
         secret: (( merge || nil ))
       routing_api:
-        secret: (( merge || nil ))
+        secret: (( merge ))
       ssh-proxy:
         secret: (( merge || nil ))
       tcp_emitter:
-        secret: (( merge || nil ))
+        secret: (( merge ))
       tcp_router:
-        secret: (( merge || nil ))
+        secret: (( merge ))
   uaadb:
     roles:
     - password: (( merge || nil ))
