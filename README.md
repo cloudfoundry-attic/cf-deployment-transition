@@ -1,11 +1,11 @@
 # Transition
-The tools in this repo
-have not been tested
-in any production transitions.
 
-Do not use them
-except if you wish to discover
-the ways in which they may fail.
+**The tools in this repo
+have not been tested
+in any production transitions
+and is still under active development.
+We'll update this section when the transition
+has been sufficiently tested.**
 
 ## Usage
 
