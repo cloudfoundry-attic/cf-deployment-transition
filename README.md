@@ -46,24 +46,24 @@ extract it from its tarball,
 and put it on your path.
 
 #### Why Create a CA Private Key Stubs File
-While we can automatically obtain 
+While we can automatically obtain
 your CA certificates
 from your existing CF manifest,
-we're unable to do the same for 
+we're unable to do the same for
 their private keys.
 
 `CF Release` relied on
 the Bosh 1.x CLI,
 which did not have a role
 in managing your deployments' certificates.
-The Bosh 2.x CLI 
+The Bosh 2.x CLI
 that `CF Deployment` relies on now, does.
 
-In order to transition your CF deployment 
+In order to transition your CF deployment
 to the new world,
 we'll need your help.
-Providing the CA keys to us now allows 
-Bosh to use the correct CA cert and key to 
+Providing the CA keys to us now allows
+Bosh to use the correct CA cert and key to
 sign new certificates as they become necessary
 in the future.
 
