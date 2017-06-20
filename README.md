@@ -96,28 +96,32 @@ all other appropriate ops-files
 and in conjunction with the ops-file
 to scale down etcd for cluster changes.
 
-This section will be updated with better instructions
-as our support for the transition process improves.
-
 ## Migration Prerequisites
 To migrate to cf-deployment
 with the tools and process we've designed and tested
 so far,
 you'll need to fulfill a number of requirements:
-- you have existing deployments of
+- You have existing deployments of
   `cf-release`
   and
   `diego-release` on AWS.
-- you've got TLS enabled and configured correctly
+- You've got TLS enabled and configured correctly
   (this is discussed in some length in the next section)
-- your databases and blobstores are external to your cf-release deployment
+- Your databases and blobstores are external to your cf-release deployment
   (for example, your database could be in a separate database deployment, or a service like RDS).
-- you will likely need
+- You will likely need
   to create a new database
   for the routing_api,
   which is included by default in CF Deployment.
   Alternatively, you can opt-out of the routing_api
-  with the remove-routing-api-for-transition.yml
+  with the `remove-routing-api-for-transition.yml`
+  ops file from this repository. See the database section below for details.
+- You will likely need
+  to create a new database
+  for the cf-networking,
+  which is included by default in CF Deployment.
+  Alternatively, you can opt-out of the routing_api
+  with the `remove-cf-networking.yml`
   ops file from this repository. See the database section below for details.
 
 The following sections discuss these prerequisites
@@ -126,10 +130,10 @@ in more depth.
 
 Our tests and tooling
 assume you are migrating an AWS environment.
-If you have a different IaaS in production
+**If you have a different IaaS in production
 and you'd like to migrate it,
 we'd love to hear from you!
-Please open an issue describing your situation.
+Please open an issue describing your situation.**
 
 ### Required TLS Certificate Topology
 It is important to note that TLS validation
