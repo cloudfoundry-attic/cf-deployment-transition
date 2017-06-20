@@ -118,6 +118,13 @@ you'll need to fulfill a number of requirements:
   (this is discussed in some length in the next section)
 - your databases and blobstores are external to your cf-release deployment
   (for example, your database could be in a separate database deployment, or a service like RDS).
+- you will likely need
+  to create a new database
+  for the routing_api,
+  which is included by default in CF Deployment.
+  Alternatively, you can opt-out of the routing_api
+  with the remove-routing-api-for-transition.yml
+  ops file from this repository. See the database section below for details.
 
 The following sections discuss these prerequisites
 and their relationships to our tools
@@ -201,6 +208,19 @@ as [documented][cf-d-ops-files-list] in the `cf-deployment` readme.
 You will need to manually extract and specify
 the configuration details
 for your external persistence providers.
+
+The routing_api database
+should be external to your deployment.
+For example, you may want
+to use an Amazon RDS instance for this purpose.
+To configure the routing_api,
+you will need to provide in your vars-file:
+  - db_type
+  - db_port
+  - routing_api_db_name
+  - routing_api_db_address
+  - routing_api_db_password
+  - routing_api_db_username
 
 ### Tests and Contributions
 We're happy to accept feedback
