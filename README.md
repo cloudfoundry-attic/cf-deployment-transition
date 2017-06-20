@@ -189,34 +189,31 @@ as long as all members of the sub-lists share CAs.
   - uaa_login_saml
 
 ### Required Database and Blobstore Configuration
-Our tools assume
-an external S3 blobstore
-and an external AWS RDS database.
-
-The transition deployment assumes
-and requires
-the use of the `use-external-dbs.yml`
-and `use-s3-blobstore.yml` ops files.
+The tools in this repo assume that
+production deployers are not using the dev/test datastores
+like postgres or WebDAV
+provided by cf-release,
+and that they instead use externally provided datastores
+such as RDS and S3.
+Correspondingly,
+it requires that deployers use
+the `use-external-dbs.yml` and `use-s3-blobstore.yml` ops files.
 Those ops files require a number of variables
 be provided in vars-files,
 as [documented][cf-d-ops-files-list] in the `cf-deployment` readme.
 
-You will need to manually extract and specify
-the configuration details
-for your external persistence providers.
+#### New databases
+If you haven't already deployed the Routing API,
+and decide to add it as part of the transition to cf-deployment,
+you'll need to set up a new external database for it.
+The information for accessing the database,
+like the address or password,
+will need to be provided to `use-external-dbs.yml`.
 
-The routing_api database
-should be external to your deployment.
-For example, you may want
-to use an Amazon RDS instance for this purpose.
-To configure the routing_api,
-you will need to provide in your vars-file:
-  - db_type
-  - db_port
-  - routing_api_db_name
-  - routing_api_db_address
-  - routing_api_db_password
-  - routing_api_db_username
+Similarly,
+you may decide to deploy the CF Networking stack
+as part of your transition.
+In that case, you'll need another external database for the CF Networking jobs.
 
 ## Tests and Contributions
 We're happy to accept feedback
