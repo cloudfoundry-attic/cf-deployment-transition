@@ -111,7 +111,7 @@ you'll need to fulfill a number of requirements:
   (for example, your database could be in a separate database deployment, or a service like RDS).
 - You will likely need
   to create a new database
-  for the routing_api,
+  for the Routing API,
   which is included by default in CF Deployment.
   Alternatively, you can opt-out of the routing_api
   with the `remove-routing-api-for-transition.yml`
