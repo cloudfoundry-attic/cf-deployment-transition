@@ -32,10 +32,10 @@
   path: /instance_groups/name=diego-cell/jobs/name=silk-cni
 
 - type: remove
-  path: /instance_groups/name=diego-bbs/jobs/name=silk-controller
+  path: /instance_groups/name=diego-api/jobs/name=silk-controller
 
 - type: remove
-  path: /instance_groups/name=diego-bbs/jobs/name=consul_agent/properties/consul/agent/services/silk-controller
+  path: /instance_groups/name=diego-api/jobs/name=consul_agent/properties/consul/agent/services/silk-controller
 
 - type: remove
   path: /instance_groups/name=api/jobs/name=policy-server
