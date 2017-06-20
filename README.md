@@ -7,9 +7,24 @@ and is still under active development.
 We'll update this section when the transition
 has been sufficiently tested.**
 
-## Usage
+This repo contains tools for migrating
+from [cf-release](https://github.com/cloudfoundry/cf-release)
+to [cf-deployment](https://github.com/cloudfoundry/cf-deployment).
+The included tools are:
+- `transition.sh`: Extracts credentials from your existing deployment manifests
+  to build a vars-store for cf-deployment.
+- `cfr-to-cfd.yml`: An ops-file that enables the migration from cf-release to cf-deployment.
+- `remove-cf-networking.yml`: Opts out of cf-networking
+  so that deployers can migrate without also adding the new networking stack.
+- `remove-routing-api-for-transition.yml`: Opts out of the Routing applied
+  so that deployers can migration without also adding the Routing API
+  and its dependencies.
 
-### Variable Extraction Script
+## Tools
+
+### `transition.sh`: Credential extraction
+
+#### Usage
 ```
 usage: transition.sh [required arguments]
   required arguments:
@@ -20,7 +35,7 @@ usage: transition.sh [required arguments]
     -N,  --cf-networking   Flag to extract cf-networking creds from the Diego Manifest
     -r,  --routing         Flag to extract routing deployment creds from the Cloud Foundry Manifest
 ```
-This is intended to result
+The output of `transition.sh`
 in a vars-store file you can use
 with the `--vars-store` option
 when deploying with `cf-deployment`
@@ -91,7 +106,7 @@ from_user:
     private_key: |
 ```
 
-### Transition Deployment
+### `cfr-to-cfd.yml`: Transition ops-file
 This is an ops file
 to be used when deploying using `cf-deployment`
 for the first time
@@ -105,7 +120,7 @@ to scale down etcd for cluster changes.
 This section will be updated with better instructions
 as our support for the transition process improves.
 
-### Prerequisites
+## Migration Prerequisites
 To migrate to cf-deployment
 with the tools and process we've designed and tested
 so far,
@@ -137,7 +152,7 @@ and you'd like to migrate it,
 we'd love to hear from you!
 Please open an issue describing your situation.
 
-#### Required TLS Certificate Topology
+### Required TLS Certificate Topology
 It is important to note that TLS validation
 is enabled throughout `cf-deployment`.
 This configuration may be more strict
@@ -192,7 +207,7 @@ as long as all members of the sub-lists share CAs.
   - uaa_ssl
   - uaa_login_saml
 
-#### Required Database and Blobstore Configuration
+### Required Database and Blobstore Configuration
 Our tools assume
 an external S3 blobstore
 and an external AWS RDS database.
@@ -222,7 +237,7 @@ you will need to provide in your vars-file:
   - routing_api_db_password
   - routing_api_db_username
 
-### Tests and Contributions
+## Tests and Contributions
 We're happy to accept feedback
 in the form of issues and pull-requests.
 If you make a change,
