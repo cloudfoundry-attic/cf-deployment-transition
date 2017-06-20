@@ -136,26 +136,24 @@ we'd love to hear from you!
 Please open an issue describing your situation.**
 
 ### Required TLS Certificate Topology
-It is important to note that TLS validation
-is enabled throughout `cf-deployment`.
-This configuration may be more strict
-about TLS configuration
-than configurations based on `cf-release` were.
+`cf-deployment` enables TLS validation
+in most places,
+which may be a more strict configuration
+than cf-release provided in its manifest generation scripts.
 
-We assume you are using self-signed certificates
-for internal TLS communication.
-This requires configuring jobs
+You'll need to configure jobs
 to trust the certificate authorities
 used to sign one another's certs.
 Getting these relationships right is complicated,
 and there is more than one possible working arrangement.
 `cf-deployment` expects a particular arrangement,
 documented below.
+
 If you have a different certificate topology,
 you'll need to either migrate to ours,
 or manage the transition on your own.
 
-This is a list of Certificate Authorities
+Below is a list of Certificate Authorities
 with indented lists of certificates
 that must share an authority.
 More-shared/permissive topologies will also work
