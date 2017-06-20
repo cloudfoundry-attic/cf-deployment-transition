@@ -41,50 +41,29 @@ with the `--vars-store` option
 when deploying with `cf-deployment`
 and the new `bosh` CLI.
 
-When you deploy with this vars-store,
-you will also need to use
-the `cfr-to-cfd.yml` ops-file.
-See the **Transition Deployment**
-section for more details.
-
-#### Yes, Spiff
-These tools use spiff templates
-to extract values from a deployment manifest
-based on `cf-release`,
-and store them in a vars-store
-for use with `cf-deployment`
-and the new `bosh` cli.
-
+#### Dependencies: Spiff (Yes, Spiff)
+`transition.sh` uses [spiff](https://github.com/cloudfoundry-incubator/spiff)
+under the hood to build the vars-store.
 To install `spiff`,
 download the latest binary [here][spiff-releases],
 extract it from its tarball,
 and put it on your path.
 
-#### Why Create a CA Private Key Stubs File
-While we can automatically obtain
-your CA certificates
-from your existing CF manifest,
-we're unable to do the same for
-their private keys.
+#### Dependencies: CA Private Key Stub File
+`cf-deployment`-based deployments use
+the v2 `bosh` CLI or [Credhub](https://github.com/cloudfoundry-incubator/credhub)
+to manage deployment credentials,
+including CA private keys.
+If cf-deployment adds new certificates,
+they'll need to be signed by a CA,
+and so credential management tools like Credhub
+will need access to the CA private key.
 
-`CF Release` relied on
-the Bosh 1.x CLI,
-which did not have a role
-in managing your deployments' certificates.
-The Bosh 2.x CLI
-that `CF Deployment` relies on now, does.
+Because CA private keys aren't included in the CF or Diego manifests,
+we'll need your help to fill out those values in the vars-store or Credhub.
+Users must provide a Private Key Stub using the `-ca` flag.
+We've included an example stub below:
 
-In order to transition your CF deployment
-to the new world,
-we'll need your help.
-Providing the CA keys to us now allows
-Bosh to use the correct CA cert and key to
-sign new certificates as they become necessary
-in the future.
-
-The CA private key stub file is required.
-
-#### Example CA Private Keys Stubs File
 ```
 ---
 from_user:
