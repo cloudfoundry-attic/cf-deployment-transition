@@ -36,7 +36,7 @@ properties:
         secret: uaa-doppler-secret
       gorouter:
         secret: uaa-router-secret
-      routing_api:
+      routing_api_client:
         secret: uaa-routing-api-secret
       ssh-proxy:
         secret: uaa-ssh-secret

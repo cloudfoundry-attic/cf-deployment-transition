@@ -155,7 +155,7 @@ function test_routing_deployment_variable_extraction() {
     -cf $missing_a_property \
     -d  ${root_dir}/fixture/source-diego-manifest.yml \
     -ca ${root_dir}/fixture/ca-private-keys.yml \
-    -N 2>&1 > /dev/null)"
+    -r 2>&1 > /dev/null)"
 
   exit_code=$?
   IT="exits 1 if routing-related properties are missing when -r is supplied"
@@ -174,9 +174,9 @@ function test_routing_deployment_variable_extraction() {
     fi
 }
 
-test_routing_deployment_variable_extraction "uaa_clients_tcp_emitter_secret" "uaa_clients_tcp_emitter_secret"
-test_routing_deployment_variable_extraction "uaa_clients_tcp_router_secret" "uaa_clients_tcp_router_secret"
-test_routing_deployment_variable_extraction "uaa_clients_routing_api_client_secret" "uaa_clients_routing_api_client_secret"
+test_routing_deployment_variable_extraction "uaa-emitter-secret" "uaa_clients_tcp_emitter_secret"
+test_routing_deployment_variable_extraction "uaa-tcp-secret" "uaa_clients_tcp_router_secret"
+test_routing_deployment_variable_extraction "uaa-routing-api-secret" "uaa_clients_routing_api_client_secret"
 
 CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)
