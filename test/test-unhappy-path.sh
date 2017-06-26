@@ -6,7 +6,7 @@ DESCRIBE="Unhappy path"
 
 # Tests
 IT="exits 1 with a helpful message if no CA keys are specified"
-  output=$(${root_dir}/../transition.sh \
+  output=$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -cf ${root_dir}/fixture/source-cf-manifest.yml \
     -d ${root_dir}/fixture/source-diego-manifest.yml)
   exit_code=$?
@@ -27,7 +27,7 @@ IT="has a helpful message if no CA keys are specified"
   fi
 
 IT="exits 1 with a helpful message if no CF manifest is specified"
-  output=$(${root_dir}/../transition.sh \
+  output=$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -d ${root_dir}/fixture/source-diego-manifest.yml)
   exit_code=$?
   expected_output=""
@@ -47,7 +47,7 @@ IT="has a helpful message if no CF manifest is specified"
   fi
 
 IT="exits 1 if no diego manifest is specified"
-  output=$(${root_dir}/../transition.sh \
+  output=$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -cf ${root_dir}/fixture/source-cf-manifest.yml)
   exit_code=$?
   expected_output=""
@@ -72,7 +72,7 @@ IT="has a helpful message if any CA keys are missing"
   do
     missing_one_ca_file=$(mktemp)
     grep -v $item ${root_dir}/fixture/ca-private-keys.yml > $missing_one_ca_file
-    output=$(${root_dir}/../transition.sh \
+    output=$(${root_dir}/../extract-vars-store-from-manifests.sh \
       -cf ${root_dir}/fixture/source-cf-manifest.yml \
       -d ${root_dir}/fixture/source-diego-manifest.yml \
       -ca ${missing_one_ca_file} 2> /dev/null)
@@ -98,7 +98,7 @@ function test_cf_networking_variable_extraction() {
 
   local exit_code
   local error_output
-  error_output="$(${root_dir}/../transition.sh \
+  error_output="$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -cf ${root_dir}/fixture/source-cf-manifest.yml \
     -d  $missing_a_property \
     -ca ${root_dir}/fixture/ca-private-keys.yml \
@@ -151,7 +151,7 @@ function test_routing_deployment_variable_extraction() {
 
   local exit_code
   local error_output
-  error_output="$(${root_dir}/../transition.sh \
+  error_output="$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -cf $missing_a_property \
     -d  ${root_dir}/fixture/source-diego-manifest.yml \
     -ca ${root_dir}/fixture/ca-private-keys.yml \
@@ -182,7 +182,7 @@ CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)
   grep -v policy_server_ca_key < ${root_dir}/fixture/ca-private-keys.yml > ${missing_a_private_key}
   echo "${CONTEXT}:"
-  error_output="$(${root_dir}/../transition.sh \
+  error_output="$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -cf ${root_dir}/fixture/source-cf-manifest.yml \
     -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
     -ca ${missing_a_private_key} \

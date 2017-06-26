@@ -6,7 +6,7 @@ examples_failed=0
 DESCRIBE="When on the happy journey"
   IT="makes a vars store from source manifests"
     pushd $(mktemp -d) > /dev/null
-      ${root_dir}/../transition.sh \
+      ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
         -d  ${root_dir}/fixture/source-diego-manifest.yml \
         -ca ${root_dir}/fixture/ca-private-keys.yml > /dev/null
@@ -24,7 +24,7 @@ DESCRIBE="When on the happy journey"
 
   IT="when run without -N, makes a vars store from source manifests that does not include cf-networking vars"
     pushd $(mktemp -d) > /dev/null
-      ${root_dir}/../transition.sh \
+      ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
         -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
         -ca ${root_dir}/fixture/ca-private-keys.yml > /dev/null
@@ -42,7 +42,7 @@ DESCRIBE="When on the happy journey"
 
   IT="makes a cf-networking vars store from source manifests"
     pushd $(mktemp -d) > /dev/null
-      ${root_dir}/../transition.sh \
+      ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
         -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
         -ca ${root_dir}/fixture/source-ca-private-keys-cf-networking.yml \
@@ -61,7 +61,7 @@ DESCRIBE="When on the happy journey"
 
   IT="makes a routing vars store from source manifests"
     pushd $(mktemp -d) > /dev/null
-      ${root_dir}/../transition.sh \
+      ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest-with-routing.yml \
         -d  ${root_dir}/fixture/source-diego-manifest.yml \
         -ca ${root_dir}/fixture/ca-private-keys.yml \
@@ -80,7 +80,7 @@ DESCRIBE="When on the happy journey"
 
   IT="makes a cf-networking and routing vars store from source manifests"
     pushd $(mktemp -d) > /dev/null
-      ${root_dir}/../transition.sh \
+      ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest-with-routing.yml \
         -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
         -ca ${root_dir}/fixture/source-ca-private-keys-cf-networking.yml \

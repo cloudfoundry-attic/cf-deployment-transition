@@ -11,7 +11,7 @@ This repo contains tools for migrating
 from [cf-release](https://github.com/cloudfoundry/cf-release)
 to [cf-deployment](https://github.com/cloudfoundry/cf-deployment).
 The included tools are:
-- `transition.sh`: Extracts credentials from your existing deployment manifests
+- `extract-vars-store-from-manifests.sh`: Extracts credentials from your existing deployment manifests
   to build a vars-store for cf-deployment.
 - `cfr-to-cfd.yml`: An ops-file that enables the migration from cf-release to cf-deployment.
 - `remove-cf-networking.yml`: Opts out of cf-networking
@@ -22,11 +22,11 @@ The included tools are:
 
 ## Tools
 
-### `transition.sh`: Credential extraction
+### `extract-vars-store-from-manifests.sh`: Credential extraction
 
 #### Usage
 ```
-usage: transition.sh [required arguments]
+usage: extract-vars-store-from-manifests.sh [required arguments]
   required arguments:
     -ca, --ca-keys         Path to your created CA Keys file
     -cf, --cf-manifest     Path to your existing Cloud Foundry Manifest
@@ -35,14 +35,14 @@ usage: transition.sh [required arguments]
     -N,  --cf-networking   Flag to extract cf-networking creds from the Diego Manifest
     -r,  --routing         Flag to extract routing deployment creds from the Cloud Foundry Manifest
 ```
-The output of `transition.sh`
+The output of `extract-vars-store-from-manifests.sh`
 in a vars-store file you can use
 with the `--vars-store` option
 when deploying with `cf-deployment`
 and the new `bosh` CLI.
 
 #### Dependencies: Spiff (Yes, Spiff)
-`transition.sh` uses [spiff](https://github.com/cloudfoundry-incubator/spiff)
+`extract-vars-store-from-manifests.sh` uses [spiff](https://github.com/cloudfoundry-incubator/spiff)
 under the hood to build the vars-store.
 To install `spiff`,
 download the latest binary [here][spiff-releases],
