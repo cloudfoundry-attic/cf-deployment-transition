@@ -14,7 +14,7 @@ The included tools are:
 - `extract-vars-store-from-manifests.sh`: Extracts credentials from your existing deployment manifests
   to build a vars-store for cf-deployment.
 - `cfr-to-cfd.yml`: An ops-file that enables the migration from cf-release to cf-deployment.
-- `remove-cf-networking.yml`: Opts out of cf-networking
+- `remove-cf-networking-for-transition.yml`: Opts out of cf-networking
   so that deployers can migrate without also adding the new networking stack.
 - `remove-routing-api-for-transition.yml`: Opts out of the Routing applied
   so that deployers can migration without also adding the Routing API
@@ -121,7 +121,7 @@ you'll need to fulfill a number of requirements:
   for the cf-networking,
   which is included by default in CF Deployment.
   Alternatively, you can opt-out of the routing_api
-  with the `remove-cf-networking.yml`
+  with the `remove-cf-networking-for-transition.yml`
   ops file from this repository. See the database section below for details.
 
 The following sections discuss these prerequisites

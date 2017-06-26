@@ -2,12 +2,6 @@
   path: /releases/name=cf-networking
 
 - type: remove
-  path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/name=network_policy
-
-- type: remove
-  path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/name=network_connectivity
-
-- type: remove
   path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/network-policy
 
 - type: remove
