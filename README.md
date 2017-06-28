@@ -169,6 +169,8 @@ as long as all members of the sub-lists share CAs.
   - consul_agent
 - service_cf_internal_ca
   - blobstore_tls
+  (if using an internal blobstore,
+  which this tool does not currently support)
   - diego_auctioneer_client
   - diego_auctioneer_server
   - diego_bbs_server

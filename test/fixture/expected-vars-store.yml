@@ -1,6 +1,3 @@
-blobstore_admin_users_password: passymcpassface
-blobstore_admin_users_username: joeyjoejoe
-blobstore_secure_link_secret: secure-link-secret
 cc_bridge_cc_uploader:
   ca: cc-uploader-ca
   certificate: cc-uploader-cert

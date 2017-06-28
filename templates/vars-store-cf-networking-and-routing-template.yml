@@ -1,7 +1,4 @@
 ---
-blobstore_admin_users_password: (( merge ))
-blobstore_admin_users_username: (( merge ))
-blobstore_secure_link_secret: (( merge ))
 cc_bridge_cc_uploader:
   ca: (( merge ))
   certificate: (( merge ))
