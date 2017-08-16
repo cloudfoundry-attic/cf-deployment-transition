@@ -2,6 +2,7 @@
 - type: replace
   path: /instance_groups/name=consul/networks/name=default/static_ips?
   value: ((consul_static_ips))
+  error: "Couldn't find a network called `default`. If you're applying `rename-network.yml`, make sure to apply this ops-file first."
 - type: replace
   path: /instance_groups/name=etcd/networks/name=default/static_ips?
   value: ((etcd_static_ips))
