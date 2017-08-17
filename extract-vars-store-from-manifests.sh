@@ -7,7 +7,7 @@ NC='\033[0m' # No Color
 
 SCRIPT_DIR=$(dirname $0)
 
-function help() {
+help() {
   echo -e "${GREEN}usage${NC}: $0 [required arguments]"
   echo "  required arguments:"
   echo -e "   ${GREEN}-ca, --ca-keys${NC}         Path to your created CA Keys file"
@@ -19,7 +19,7 @@ function help() {
   echo -e "   ${GREEN}-r,  --routing${NC}      Flag to extract routing deployment creds from the Cloud Foundry Manifest"
 }
 
-function ca_key_stub_help() {
+ca_key_stub_help() {
 cat <<EOF
 $(echo -e "${RED}You must create a Certificate Authority Key stub and provide it to $0.${NC}")
 The file must be valid yaml with the following schema:
@@ -47,7 +47,7 @@ EOF
   echo
 }
 
-function check_params() {
+check_params() {
   local ca_keys=false
   local cf_manifest=false
   local diego_manifest=false
@@ -84,7 +84,7 @@ function check_params() {
   fi
 }
 
-function parse_args() {
+parse_args() {
   while [[ $# -gt 0 ]]
   do
     key="$1"
@@ -119,7 +119,7 @@ function parse_args() {
   done
 }
 
-function prettify_spiff_errors() {
+prettify_spiff_errors() {
   local spiff_temp_output
   spiff_temp_output=${1}
   # There must be error output.  Use it to find which key(s) we're missing.
@@ -130,7 +130,7 @@ function prettify_spiff_errors() {
   done
 }
 
-function check_ca_private_key() {
+check_ca_private_key() {
   local ca_key_name=$1
   local ca_key_error=""
   local spiff_temp_output
@@ -142,7 +142,7 @@ function check_ca_private_key() {
   fi
 }
 
-function extract_uaa_jwt_value() {
+extract_uaa_jwt_value() {
   local uaa_jwt_spiff_template
   uaa_jwt_spiff_template="${1}"
 
@@ -156,7 +156,7 @@ ${uaa_jwt_value}
 EOF
 }
 
-function spiff_it() {
+spiff_it() {
   uaa_jwt_spiff_template=$(mktemp)
 
   extract_uaa_jwt_value "${uaa_jwt_spiff_template}"
@@ -180,7 +180,7 @@ function spiff_it() {
   $uaa_jwt_spiff_template
 }
 
-function handle_spiff_errors() {
+handle_spiff_errors() {
   set +e
   spiff_temp_output=$(mktemp)
   # spiff_it > /dev/null
@@ -199,7 +199,7 @@ function handle_spiff_errors() {
   fi
 }
 
-function main() {
+main() {
   check_params
   handle_spiff_errors
 }
