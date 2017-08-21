@@ -12,11 +12,11 @@ help() {
   echo "  required arguments:"
   echo -e "   ${GREEN}-ca, --ca-keys${NC}         Path to your created CA Keys file"
   echo -e "   ${GREEN}-cf, --cf-manifest${NC}     Path to your existing Cloud Foundry Manifest"
-  echo -e "   ${GREEN}-d,  --diego-manifest${NC}  Path to your existiong Diego Manifest"
+  echo -e "   ${GREEN}-d,  --diego-manifest${NC}  Path to your existing Diego Manifest"
   echo -e "   ${GREEN}-h,  --help${NC}            Print this here message"
   echo "  optional arguments:"
   echo -e "   ${GREEN}-N,  --cf-networking${NC}   Flag to extract cf-networking creds from the Diego Manifest"
-  echo -e "   ${GREEN}-r,  --routing${NC}      Flag to extract routing deployment creds from the Cloud Foundry Manifest"
+  echo -e "   ${GREEN}-r,  --routing${NC}         Flag to extract routing deployment creds from the Cloud Foundry Manifest"
 }
 
 ca_key_stub_help() {
