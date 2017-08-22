@@ -54,6 +54,14 @@ diego_bbs_server:
   certificate: (( properties.diego.bbs.server_cert ))
   private_key: (( properties.diego.bbs.server_key ))
 diego_database_password: (( properties.diego.bbs.sql.db_password ))
+diego_locket_server:
+  ca: (( jobs.[0].properties.tls.ca_cert ))
+  certificate: (( jobs.[0].properties.tls.certificate ))
+  private_key: (( jobs.[0].properties.tls.key ))
+diego_locket_client:
+  ca: (( properties.diego.bbs.ca_cert ))
+  certificate: (( properties.diego.bbs.client_cert ))
+  private_key: (( properties.diego.bbs.client_key ))
 diego_rep_agent:
   ca: (( properties.diego.rep.ca_cert ))
   certificate: (( properties.diego.rep.server_cert ))
@@ -87,6 +95,7 @@ etcd_server:
   ca: (( properties.etcd.ca_cert ))
   certificate: (( properties.etcd.server_cert ))
   private_key: (( properties.etcd.server_key ))
+locket_database_password: (( properties.diego.locket.sql.db_password ))
 loggregator_ca:
   ca: (( properties.loggregator.tls.ca_cert ))
   certificate: (( properties.loggregator.tls.ca_cert ))
@@ -166,6 +175,7 @@ silk_controller:
   certificate: (( properties.cf_networking.silk_controller.server_cert ))
   private_key: (( properties.cf_networking.silk_controller.server_key ))
 uaa_clients_network_policy_secret: (( properties.cf_networking.policy_server.uaa_client_secret ))
+jobs: (( merge ))
 properties:
   app_ssh:
     host_key_fingerprint: (( merge || nil ))
@@ -270,6 +280,8 @@ properties:
       ca_cert: (( merge ))
       server_cert: (( merge || nil ))
       server_key: (( merge || nil ))
+      client_cert: (( merge ))
+      client_key: (( merge ))
       auctioneer:
         ca_cert: (( merge ))
         client_cert: (( merge || nil ))
@@ -278,6 +290,9 @@ properties:
         ca_cert: (( merge ))
         client_cert: (( merge || nil ))
         client_key: (( merge || nil ))
+    locket:
+      sql:
+        db_password: (( merge ))
     rep:
       ca_cert: (( merge ))
       server_cert: (( merge || nil ))

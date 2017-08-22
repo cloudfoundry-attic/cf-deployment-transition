@@ -1,4 +1,12 @@
 ---
+jobs:
+- name: database_z1
+  properties:
+    tls:
+      ca_cert: service-cf-internal-ca-cert
+      certificate: locket-server-cert
+      key: locket-server-key
+
 properties:
   capi:
     cc_uploader:
@@ -35,8 +43,14 @@ properties:
       - passphrase: steve-passcode
       server_cert: diego-bbs-server-cert
       server_key: diego-bbs-server-key
+      client_cert: diego-bbs-client-cert
+      client_key: diego-bbs-client-key
       sql:
         db_password: steve-hat
+    locket:
+      sql:
+        ca_cert: service-cf-internal-ca-cert
+        db_password: locket-database-password
     rep:
       ca_cert: diego-rep-ca
       server_cert: diego-rep-agent-cert
@@ -49,3 +63,21 @@ properties:
         client_key: diego-ssh-proxy-bbs-client-key
   doppler_endpoint:
     shared_secret: dropsonde-shared-sekret
+  cf_networking:
+    policy_server:
+      ca_cert: policy_server_ca_cert
+      server_cert: policy_server_cert
+      server_key: policy_server_key
+      uaa_client_secret: policy_server_uaa_client_secret
+    silk_controller:
+      ca_cert: silk_controller_ca_cert
+      server_cert: silk_controller_server_cert
+      server_key: silk_controller_server_key
+    silk_daemon:
+      ca_cert: silk_daemon_ca_cert
+      client_cert: silk_daemon_client_cert
+      client_key: silk_daemon_client_key
+    vxlan_policy_agent:
+      ca_cert: vxlan_policy_agent_ca_cert
+      client_cert: vxlan_policy_agent_client_cert
+      client_key: vxlan_policy_agent_client_key

@@ -1,0 +1,10 @@
+---
+- type: remove
+  path: /diego_locket_server
+
+- type: remove
+  path: /diego_locket_client
+
+- type: remove
+  path: /locket_database_password
+

@@ -51,6 +51,14 @@ diego_bbs_server:
   certificate: (( merge ))
   private_key: (( merge ))
 diego_database_password: (( merge ))
+diego_locket_server:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
+diego_locket_client:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
 diego_rep_agent:
   ca: (( merge ))
   certificate: (( merge ))
@@ -83,6 +91,7 @@ etcd_server:
   ca: (( merge ))
   certificate: (( merge ))
   private_key: (( merge ))
+locket_database_password: (( merge ))
 loggregator_ca:
   ca: (( merge ))
   certificate: (( merge ))

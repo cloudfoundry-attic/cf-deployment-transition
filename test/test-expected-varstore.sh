@@ -26,7 +26,7 @@ DESCRIBE="When on the happy journey"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
-        -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
+        -d  ${root_dir}/fixture/source-diego-manifest.yml \
         -ca ${root_dir}/fixture/ca-private-keys.yml > /dev/null
 
       diff -wB -C5 ${root_dir}/fixture/expected-vars-store.yml deployment-vars.yml
@@ -44,7 +44,7 @@ DESCRIBE="When on the happy journey"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
-        -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
+        -d  ${root_dir}/fixture/source-diego-manifest.yml \
         -ca ${root_dir}/fixture/source-ca-private-keys-cf-networking.yml \
         -N > /dev/null
 
@@ -82,12 +82,31 @@ DESCRIBE="When on the happy journey"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest-with-routing.yml \
-        -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
+        -d  ${root_dir}/fixture/source-diego-manifest.yml \
         -ca ${root_dir}/fixture/source-ca-private-keys-cf-networking.yml \
         -N \
         -r > /dev/null
 
       diff -wB -C5 ${root_dir}/fixture/expected-cf-networking-and-routing-vars.yml deployment-vars.yml
+      status=$?
+
+      if [ "$status" == "0" ]; then
+        echo PASS - ${IT}
+      else
+        echo FAIL - ${IT}
+        examples_failed=1
+      fi
+    popd > /dev/null
+
+  IT="makes a locket vars store from source manifests"
+    pushd $(mktemp -d) > /dev/null
+      ${root_dir}/../extract-vars-store-from-manifests.sh \
+        -cf ${root_dir}/fixture/source-cf-manifest.yml \
+        -d  ${root_dir}/fixture/source-diego-manifest.yml \
+        -ca ${root_dir}/fixture/ca-private-keys.yml \
+        -Q > /dev/null
+
+      diff -wB -C5 ${root_dir}/fixture/expected-locket-vars.yml deployment-vars.yml
       status=$?
 
       if [ "$status" == "0" ]; then

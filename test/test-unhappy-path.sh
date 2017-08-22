@@ -94,7 +94,7 @@ function test_cf_networking_variable_extraction() {
 
   local missing_a_property
   missing_a_property=$(mktemp)
-  grep -v $required_property ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml > $missing_a_property
+  grep -v $required_property ${root_dir}/fixture/source-diego-manifest.yml > $missing_a_property
 
   local exit_code
   local error_output
@@ -184,7 +184,7 @@ CONTEXT="CF networking private keys"
   echo "${CONTEXT}:"
   error_output="$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -cf ${root_dir}/fixture/source-cf-manifest.yml \
-    -d  ${root_dir}/fixture/source-diego-manifest-with-cf-networking.yml \
+    -d  ${root_dir}/fixture/source-diego-manifest.yml \
     -ca ${missing_a_private_key} \
     -N 2>&1 > /dev/null)"
 
@@ -204,6 +204,49 @@ CONTEXT="CF networking private keys"
       echo FAIL - ${IT} - policy_server_ca_key
     fi
 
+function test_locket_variable_extraction() {
+  local required_property
+  required_property="${1}"
+
+  local error_message
+  error_message="${2}"
+
+  local missing_a_property
+  missing_a_property=$(mktemp)
+  grep -v $required_property ${root_dir}/fixture/source-diego-manifest.yml > $missing_a_property
+
+  local exit_code
+  local error_output
+  error_output="$(${root_dir}/../extract-vars-store-from-manifests.sh \
+    -cf ${root_dir}/fixture/source-cf-manifest.yml \
+    -d  $missing_a_property \
+    -ca ${root_dir}/fixture/ca-private-keys.yml \
+    -Q 2>&1 > /dev/null)"
+
+  exit_code=$?
+
+  IT="exits 1 if locket properties are missing when -Q is supplied"
+    if [ "$exit_code" == "1" ]; then
+      echo PASS - ${IT} - $required_property
+    else
+      examples_failed=1
+      echo FAIL - ${IT} - $required_property
+    fi
+  IT="has a helpful message if locket properties are missing when -Q is supplied"
+    if echo "${error_output}" | grep -q -e $error_message ; then
+      echo PASS - ${IT} - $required_property
+    else
+      examples_failed=1
+      echo FAIL - ${IT} - $required_property
+    fi
+}
+
+test_locket_variable_extraction "locket-server-cert" "diego_locket_server.certificate"
+test_locket_variable_extraction "locket-server-key" "diego_locket_server.private_key"
+test_locket_variable_extraction "service-cf-internal-ca-cert" "diego_locket_server.ca"
+test_locket_variable_extraction "diego-bbs-client-cert" "diego_locket_client.cert"
+test_locket_variable_extraction "diego-bbs-client-key" "diego_locket_client.private_key"
+test_locket_variable_extraction "locket-database-password" "locket_database_password"
 
 # "test framework" exit code matching/reporting
 if [[ "${examples_failed}" > 0 ]]; then

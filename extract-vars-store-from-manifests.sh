@@ -17,6 +17,7 @@ help() {
   echo "  optional arguments:"
   echo -e "   ${GREEN}-N,  --cf-networking${NC}   Flag to extract cf-networking creds from the Diego Manifest"
   echo -e "   ${GREEN}-r,  --routing${NC}         Flag to extract routing deployment creds from the Cloud Foundry Manifest"
+  echo -e "   ${GREEN}-Q,  --locket{NC}           Flag to extract locket creds from the Cloud Foundry Manifest"
 }
 
 ca_key_stub_help() {
@@ -107,6 +108,9 @@ parse_args() {
       -r|--routing)
       ROUTING=true
       ;;
+      -Q|--locket)
+      LOCKET=true
+      ;;
       -h|--help)
       help
       exit 0
@@ -178,6 +182,11 @@ spiff_it() {
   if [ -z "${ROUTING}" ]; then
     vars_store_ops="${vars_store_ops} -o $SCRIPT_DIR/util/remove-routing-ops.yml"
     vars_pre_processing_ops="${vars_pre_processing_ops} -o $SCRIPT_DIR/util/remove-routing-pre-processing-ops.yml"
+  fi
+
+  if [ -z "${LOCKET}" ]; then
+    vars_store_ops="${vars_store_ops} -o $SCRIPT_DIR/util/remove-locket-ops.yml"
+    vars_pre_processing_ops="${vars_pre_processing_ops} -o $SCRIPT_DIR/util/remove-locket-pre-processing-ops.yml"
   fi
 
   $SCRIPT_DIR/util/spiff-unescape.sh \
