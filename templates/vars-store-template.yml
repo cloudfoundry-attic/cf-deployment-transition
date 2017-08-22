@@ -124,7 +124,10 @@ uaa_clients_cc-service-dashboards_secret: (( merge ))
 uaa_clients_cloud_controller_username_lookup_secret: (( merge ))
 uaa_clients_doppler_secret: (( merge ))
 uaa_clients_gorouter_secret: (( merge ))
+uaa_clients_routing_api_client_secret: (( merge ))
 uaa_clients_ssh-proxy_secret: (( merge ))
+uaa_clients_tcp_emitter_secret: (( merge ))
+uaa_clients_tcp_router_secret: (( merge ))
 uaa_database_password: (( merge ))
 uaa_jwt_signing_key:
   private_key: (( merge ))
@@ -140,3 +143,28 @@ cc_bridge_cc_uploader_server:
   ca: (( merge ))
   certificate: (( merge ))
   private_key: (( merge ))
+network_policy_ca:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
+network_policy_server:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
+network_policy_client:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
+silk_ca:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
+silk_daemon:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
+silk_controller:
+  ca: (( merge ))
+  certificate: (( merge ))
+  private_key: (( merge ))
+uaa_clients_network_policy_secret: (( merge ))

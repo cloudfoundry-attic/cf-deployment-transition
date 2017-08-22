@@ -1,0 +1,29 @@
+- type: remove
+  path: /network_policy_ca
+
+- type: remove
+  path: /network_policy_server
+
+- type: remove
+  path: /network_policy_client
+
+- type: remove
+  path: /silk_ca
+
+- type: remove
+  path: /silk_daemon
+
+- type: remove
+  path: /silk_controller
+
+- type: remove
+  path: /uaa_clients_network_policy_secret
+
+- type: remove
+  path: /properties/cf_networking
+
+- type: remove
+  path: /from_user/silk_ca
+
+- type: remove
+  path: /from_user/policy_server_ca

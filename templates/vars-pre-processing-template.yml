@@ -1,3 +1,4 @@
+---
 system_domain: (( properties.system_domain ))
 # Using an array index is dangerous.  Consider using an Ops file for this.
 cf_admin_password: (( properties.uaa.scim.users.[0].password ))
@@ -121,6 +122,7 @@ uaa_clients_cc-service-dashboards_secret: (( properties.uaa.clients.cc-service-d
 uaa_clients_cloud_controller_username_lookup_secret: (( properties.uaa.clients.cloud_controller_username_lookup.secret ))
 uaa_clients_doppler_secret: (( properties.uaa.clients.doppler.secret ))
 uaa_clients_gorouter_secret: (( properties.uaa.clients.gorouter.secret ))
+uaa_clients_routing_api_client_secret: (( properties.uaa.clients.routing_api_client.secret ))
 uaa_clients_ssh-proxy_secret: (( properties.uaa.clients.ssh-proxy.secret ))
 uaa_clients_tcp_emitter_secret: (( properties.uaa.clients.tcp_emitter.secret ))
 uaa_clients_tcp_router_secret: (( properties.uaa.clients.tcp_router.secret ))
@@ -139,7 +141,31 @@ cc_bridge_cc_uploader_server:
   ca: (( properties.capi.cc_uploader.mutual_tls.ca_cert ))
   certificate: (( properties.capi.cc_uploader.mutual_tls.server_cert ))
   private_key: (( properties.capi.cc_uploader.mutual_tls.server_key ))
-
+network_policy_ca:
+  ca: (( properties.cf_networking.policy_server.ca_cert ))
+  certificate: (( properties.cf_networking.policy_server.ca_cert ))
+  private_key: (( from_user.policy_server_ca.private_key ))
+network_policy_server:
+  ca: (( properties.cf_networking.policy_server.ca_cert ))
+  certificate: (( properties.cf_networking.policy_server.server_cert ))
+  private_key: (( properties.cf_networking.policy_server.server_key ))
+network_policy_client:
+  ca: (( properties.cf_networking.vxlan_policy_agent.ca_cert ))
+  certificate: (( properties.cf_networking.vxlan_policy_agent.client_cert ))
+  private_key: (( properties.cf_networking.vxlan_policy_agent.client_key ))
+silk_ca:
+  ca: (( properties.cf_networking.silk_controller.ca_cert ))
+  certificate: (( properties.cf_networking.silk_controller.ca_cert ))
+  private_key: (( from_user.silk_ca.private_key ))
+silk_daemon:
+  ca: (( properties.cf_networking.silk_daemon.ca_cert ))
+  certificate: (( properties.cf_networking.silk_daemon.client_cert ))
+  private_key: (( properties.cf_networking.silk_daemon.client_key ))
+silk_controller:
+  ca: (( properties.cf_networking.silk_controller.ca_cert ))
+  certificate: (( properties.cf_networking.silk_controller.server_cert ))
+  private_key: (( properties.cf_networking.silk_controller.server_key ))
+uaa_clients_network_policy_secret: (( properties.cf_networking.policy_server.uaa_client_secret ))
 properties:
   app_ssh:
     host_key_fingerprint: (( merge || nil ))
@@ -178,12 +204,14 @@ properties:
         secret: (( merge || nil ))
       gorouter:
         secret: (( merge || nil ))
+      routing_api_client:
+        secret: (( merge ))
       ssh-proxy:
         secret: (( merge || nil ))
       tcp_emitter:
-        secret: (( merge || nil ))
+        secret: (( merge ))
       tcp_router:
-        secret: (( merge || nil ))
+        secret: (( merge ))
   uaadb:
     roles:
     - password: (( merge || nil ))
@@ -286,3 +314,27 @@ properties:
     route_services_secret: (( merge || nil ))
     status:
       password: (( merge || nil ))
+  cf_networking:
+    policy_server:
+      ca_cert: (( merge ))
+      server_cert: (( merge ))
+      server_key: (( merge ))
+      uaa_client_secret: (( merge ))
+    silk_controller:
+      ca_cert: (( merge ))
+      server_cert: (( merge ))
+      server_key: (( merge ))
+    silk_daemon:
+      ca_cert: (( merge ))
+      client_cert: (( merge ))
+      client_key: (( merge ))
+    vxlan_policy_agent:
+      ca_cert: (( merge ))
+      client_cert: (( merge ))
+      client_key: (( merge ))
+
+from_user:
+  policy_server_ca:
+    private_key: (( merge ))
+  silk_ca:
+    private_key: (( merge ))

@@ -1,0 +1,8 @@
+- type: remove
+  path: /uaa_clients_routing_api_client_secret
+
+- type: remove
+  path: /uaa_clients_tcp_emitter_secret
+
+- type: remove
+  path: /uaa_clients_tcp_router_secret

@@ -1,0 +1,13 @@
+- type: remove
+  path: /uaa_clients_routing_api_client_secret
+
+- type: replace
+  path: /properties/uaa/clients/tcp_emitter/secret
+  value: "[[ merge || nil ]]"
+
+- type: replace
+  path: /properties/uaa/clients/tcp_router/secret
+  value: "[[ merge || nil ]]"
+
+- type: remove
+  path: /properties/uaa/clients/routing_api_client

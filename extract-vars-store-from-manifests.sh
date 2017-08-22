@@ -161,15 +161,33 @@ spiff_it() {
 
   extract_uaa_jwt_value "${uaa_jwt_spiff_template}"
 
-  if [ -n "${CF_NETWORKING}" ] && [ -n "${ROUTING}" ]; then
-    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-cf-networking-and-routing-template.yml $SCRIPT_DIR/templates/vars-pre-processing-cf-networking-and-routing-template.yml"
-  elif [ -n "${CF_NETWORKING}" ]; then
-    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-cf-networking-template.yml $SCRIPT_DIR/templates/vars-pre-processing-cf-networking-template.yml"
-  elif [ -n "${ROUTING}" ]; then
-    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-routing-template.yml $SCRIPT_DIR/templates/vars-pre-processing-routing-template.yml"
-  else
-    MERGE_TEMPLATES="$SCRIPT_DIR/templates/vars-store-template.yml $SCRIPT_DIR/templates/vars-pre-processing-template.yml"
+  vars_store_template=$(mktemp)
+  vars_pre_processing_template=$(mktemp)
+  MERGE_TEMPLATES="${vars_store_template} ${vars_pre_processing_template}"
+
+  local vars_store_ops
+  vars_store_ops=""
+  local vars_pre_processing_ops
+  vars_pre_processing_ops=""
+
+  if [ -z "${CF_NETWORKING}" ]; then
+    vars_store_ops="${vars_store_ops} -o $SCRIPT_DIR/util/remove-cf-networking-vars-store-ops.yml"
+    vars_pre_processing_ops="${vars_pre_processing_ops} -o $SCRIPT_DIR/util/remove-cf-networking-vars-store-pre-processing-ops.yml"
   fi
+
+  if [ -z "${ROUTING}" ]; then
+    vars_store_ops="${vars_store_ops} -o $SCRIPT_DIR/util/remove-routing-ops.yml"
+    vars_pre_processing_ops="${vars_pre_processing_ops} -o $SCRIPT_DIR/util/remove-routing-pre-processing-ops.yml"
+  fi
+
+  $SCRIPT_DIR/util/spiff-unescape.sh \
+    <(bosh interpolate <($SCRIPT_DIR/util/spiff-escape.sh $SCRIPT_DIR/templates/vars-store-template.yml) \
+      ${vars_store_ops}
+      ) > ${vars_store_template}
+  $SCRIPT_DIR/util/spiff-unescape.sh \
+    <(bosh interpolate <($SCRIPT_DIR/util/spiff-escape.sh $SCRIPT_DIR/templates/vars-pre-processing-template.yml) \
+      ${vars_pre_processing_ops}
+      ) > ${vars_pre_processing_template}
 
   spiff merge \
   $MERGE_TEMPLATES \
