@@ -35,10 +35,13 @@
   path: /instance_groups/name=api/jobs/name=policy-server
 
 - type: remove
+  path: /instance_groups/name=api/jobs/name=policy-server-internal
+
+- type: remove
   path: /instance_groups/name=api/jobs/name=route_registrar/properties/route_registrar/routes/name=policy-server
 
 - type: remove
-  path: /instance_groups/name=api/jobs/name=consul_agent/properties/consul/agent/services/policy-server
+  path: /instance_groups/name=api/jobs/name=consul_agent/properties/consul/agent/services/policy-server-internal
 
 - type: remove
   path: /variables/name=network_policy_database_password?
