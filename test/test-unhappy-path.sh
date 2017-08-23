@@ -122,9 +122,9 @@ function test_cf_networking_variable_extraction() {
     fi
 }
 
-test_cf_networking_variable_extraction "policy_server_ca_cert" "policy_server.ca_cert"
-test_cf_networking_variable_extraction "policy_server_cert" "policy_server.server_cert"
-test_cf_networking_variable_extraction "policy_server_key" "policy_server.server_key"
+test_cf_networking_variable_extraction "policy_server_ca_cert" "policy_server_internal.ca_cert"
+test_cf_networking_variable_extraction "policy_server_cert" "policy_server_internal.server_cert"
+test_cf_networking_variable_extraction "policy_server_key" "policy_server_internal.server_key"
 test_cf_networking_variable_extraction "policy_server_uaa_client_secret" "policy_server.uaa_client_secret"
 
 test_cf_networking_variable_extraction "silk_controller_ca_cert" "silk_controller.ca_cert"

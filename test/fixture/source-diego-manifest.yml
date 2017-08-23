@@ -65,10 +65,11 @@ properties:
     shared_secret: dropsonde-shared-sekret
   cf_networking:
     policy_server:
+      uaa_client_secret: policy_server_uaa_client_secret
+    policy_server_internal:
       ca_cert: policy_server_ca_cert
       server_cert: policy_server_cert
       server_key: policy_server_key
-      uaa_client_secret: policy_server_uaa_client_secret
     silk_controller:
       ca_cert: silk_controller_ca_cert
       server_cert: silk_controller_server_cert

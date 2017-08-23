@@ -151,13 +151,13 @@ cc_bridge_cc_uploader_server:
   certificate: (( properties.capi.cc_uploader.mutual_tls.server_cert ))
   private_key: (( properties.capi.cc_uploader.mutual_tls.server_key ))
 network_policy_ca:
-  ca: (( properties.cf_networking.policy_server.ca_cert ))
-  certificate: (( properties.cf_networking.policy_server.ca_cert ))
+  ca: (( properties.cf_networking.policy_server_internal.ca_cert ))
+  certificate: (( properties.cf_networking.policy_server_internal.ca_cert ))
   private_key: (( from_user.policy_server_ca.private_key ))
 network_policy_server:
-  ca: (( properties.cf_networking.policy_server.ca_cert ))
-  certificate: (( properties.cf_networking.policy_server.server_cert ))
-  private_key: (( properties.cf_networking.policy_server.server_key ))
+  ca: (( properties.cf_networking.policy_server_internal.ca_cert ))
+  certificate: (( properties.cf_networking.policy_server_internal.server_cert ))
+  private_key: (( properties.cf_networking.policy_server_internal.server_key ))
 network_policy_client:
   ca: (( properties.cf_networking.vxlan_policy_agent.ca_cert ))
   certificate: (( properties.cf_networking.vxlan_policy_agent.client_cert ))
@@ -331,10 +331,11 @@ properties:
       password: (( merge || nil ))
   cf_networking:
     policy_server:
+      uaa_client_secret: (( merge ))
+    policy_server_internal:
       ca_cert: (( merge ))
       server_cert: (( merge ))
       server_key: (( merge ))
-      uaa_client_secret: (( merge ))
     silk_controller:
       ca_cert: (( merge ))
       server_cert: (( merge ))
