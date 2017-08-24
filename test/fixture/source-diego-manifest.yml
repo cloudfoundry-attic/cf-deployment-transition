@@ -4,7 +4,7 @@ jobs:
   properties:
     tls:
       ca_cert: service-cf-internal-ca-cert
-      certificate: locket-server-cert
+      cert: locket-server-cert
       key: locket-server-key
 
 properties:
