@@ -1,3 +1,5 @@
+jobs:
+- name: dummy_job
 properties:
   app_ssh:
     host_key_fingerprint: a-b-c

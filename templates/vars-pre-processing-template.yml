@@ -175,7 +175,9 @@ silk_controller:
   certificate: (( properties.cf_networking.silk_controller.server_cert ))
   private_key: (( properties.cf_networking.silk_controller.server_key ))
 uaa_clients_network_policy_secret: (( properties.cf_networking.policy_server.uaa_client_secret ))
-jobs: (( merge ))
+jobs:
+- name: database_z1
+  properties: (( merge ))
 properties:
   app_ssh:
     host_key_fingerprint: (( merge || nil ))
