@@ -39,7 +39,7 @@ properties:
       routing_api_client:
         secret: uaa-routing-api-secret
       ssh-proxy:
-        secret: uaa-ssh-secret
+        secret:  ((/some/credhub/source/uaa-ssh-secret))
       tcp_emitter:
         secret: uaa-emitter-secret
       tcp_router:

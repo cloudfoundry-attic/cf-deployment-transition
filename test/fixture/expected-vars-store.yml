@@ -82,7 +82,7 @@ diego_rep_agent:
   private_key: diego-rep-agent-key
 diego_rep_client:
   ca: diego-rep-ca
-  certificate: diego-rep-client-cert
+  certificate: ((/some/credhub/path/diego-rep-client-cert))
   private_key: diego-rep-client-key
 diego_ssh_proxy_host_key:
   private_key: diego-ssh-key
@@ -103,7 +103,7 @@ etcd_peer:
 etcd_peer_ca:
   ca: etcd-peer-ca
   certificate: etcd-peer-ca
-  private_key: etcd-peer-ca-private-key
+  private_key: ((/some/credhub/path/etcd-peer-ca-private-key))
 etcd_server:
   ca: etcd-ca
   certificate: etcd-server-cert
@@ -150,7 +150,7 @@ uaa_clients_cc-service-dashboards_secret: uaa-cc-service-secret
 uaa_clients_cloud_controller_username_lookup_secret: uaa-cc-secret
 uaa_clients_doppler_secret: uaa-doppler-secret
 uaa_clients_gorouter_secret: uaa-router-secret
-uaa_clients_ssh-proxy_secret: uaa-ssh-secret
+uaa_clients_ssh-proxy_secret:  ((/some/credhub/source/uaa-ssh-secret))
 uaa_database_password: uaadb-password
 uaa_jwt_signing_key:
   private_key: |+

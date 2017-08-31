@@ -198,10 +198,12 @@ spiff_it() {
       ${vars_pre_processing_ops}
       ) > ${vars_pre_processing_template}
 
+  escaped_cf_manifest=$(mktemp)
+  $SCRIPT_DIR/util/spiff-escape.sh ${CF_MANIFEST} > ${escaped_cf_manifest}
   spiff merge \
   $MERGE_TEMPLATES \
   $SCRIPT_DIR/templates/vars-ca-template.yml \
-  $CF_MANIFEST \
+  $escaped_cf_manifest \
   $DIEGO_MANIFEST \
   $CA_KEYS \
   $uaa_jwt_spiff_template
@@ -216,7 +218,7 @@ handle_spiff_errors() {
   echo $spiff_temp_output
   cat $spiff_temp_output
   if [ $(cat $spiff_temp_output | wc -l) == 0 ]; then
-    spiff_it > deployment-vars.yml
+    $SCRIPT_DIR/util/spiff-unescape.sh <(spiff_it) > deployment-vars.yml
     echo -e "${GREEN}Merge successful!${NC}"
     echo "Please find your new vars store file in $PWD/deployment-vars.yml"
   else

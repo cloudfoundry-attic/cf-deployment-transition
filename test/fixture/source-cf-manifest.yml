@@ -39,7 +39,7 @@ properties:
       gorouter:
         secret: uaa-router-secret
       ssh-proxy:
-        secret: uaa-ssh-secret
+        secret: ((/some/credhub/source/uaa-ssh-secret))
     jwt:
       policy:
         active_key_id: key-1

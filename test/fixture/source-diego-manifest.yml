@@ -32,7 +32,7 @@ properties:
       ca_cert: service-cf-internal-ca-cert
       rep:
         ca_cert: diego-rep-ca
-        client_cert: diego-rep-client-cert
+        client_cert: ((/some/credhub/path/diego-rep-client-cert))
         client_key: diego-rep-client-key
       auctioneer:
         ca_cert: service-cf-internal-ca-cert
