@@ -17,7 +17,7 @@ help() {
   echo "  optional arguments:"
   echo -e "   ${GREEN}-N,  --cf-networking${NC}   Flag to extract cf-networking creds from the Diego Manifest"
   echo -e "   ${GREEN}-r,  --routing${NC}         Flag to extract routing deployment creds from the Cloud Foundry Manifest"
-  echo -e "   ${GREEN}-Q,  --locket{NC}           Flag to extract locket creds from the Cloud Foundry Manifest"
+  echo -e "   ${GREEN}-Q,  --locket${NC}           Flag to extract locket creds from the Cloud Foundry Manifest"
 }
 
 ca_key_stub_help() {

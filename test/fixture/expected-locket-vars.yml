@@ -78,8 +78,8 @@ diego_bbs_server:
 diego_database_password: steve-hat
 diego_locket_client:
   ca: service-cf-internal-ca-cert
-  certificate: diego-bbs-client-cert
-  private_key: diego-bbs-client-key
+  certificate: diego-auctioneer-bbs-client-cert
+  private_key: diego-auctioneer-bbs-client-key
 diego_locket_server:
   ca: service-cf-internal-ca-cert
   certificate: locket-server-cert

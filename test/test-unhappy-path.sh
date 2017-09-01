@@ -244,8 +244,8 @@ function test_locket_variable_extraction() {
 test_locket_variable_extraction "locket-server-cert" "diego_locket_server.certificate"
 test_locket_variable_extraction "locket-server-key" "diego_locket_server.private_key"
 test_locket_variable_extraction "service-cf-internal-ca-cert" "diego_locket_server.ca"
-test_locket_variable_extraction "diego-bbs-client-cert" "diego_locket_client.cert"
-test_locket_variable_extraction "diego-bbs-client-key" "diego_locket_client.private_key"
+test_locket_variable_extraction "diego-auctioneer-bbs-client-cert" "diego_locket_client.cert"
+test_locket_variable_extraction "diego-auctioneer-bbs-client-key" "diego_locket_client.private_key"
 test_locket_variable_extraction "locket-database-password" "locket_database_password"
 
 # "test framework" exit code matching/reporting

@@ -28,6 +28,9 @@ properties:
       ca_cert: service-cf-internal-ca-cert
       server_cert: diego-auctioneer-server-cert
       server_key: diego-auctioneer-server-key
+      bbs:
+        client_cert: diego-auctioneer-bbs-client-cert
+        client_key: diego-auctioneer-bbs-client-key
     bbs:
       ca_cert: service-cf-internal-ca-cert
       rep:
@@ -43,8 +46,6 @@ properties:
       - passphrase: steve-passcode
       server_cert: diego-bbs-server-cert
       server_key: diego-bbs-server-key
-      client_cert: diego-bbs-client-cert
-      client_key: diego-bbs-client-key
       sql:
         db_password: steve-hat
     locket:

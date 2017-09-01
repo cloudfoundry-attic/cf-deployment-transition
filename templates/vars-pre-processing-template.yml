@@ -60,8 +60,8 @@ diego_locket_server:
   private_key: (( jobs.[0].properties.tls.key ))
 diego_locket_client:
   ca: (( properties.diego.bbs.ca_cert ))
-  certificate: (( properties.diego.bbs.client_cert ))
-  private_key: (( properties.diego.bbs.client_key ))
+  certificate: (( properties.diego.auctioneer.bbs.client_cert ))
+  private_key: (( properties.diego.auctioneer.bbs.client_key ))
 diego_rep_agent:
   ca: (( properties.diego.rep.ca_cert ))
   certificate: (( properties.diego.rep.server_cert ))
@@ -273,6 +273,9 @@ properties:
       ca_cert: (( merge || nil ))
       server_key: (( merge || nil ))
       server_cert: (( merge || nil ))
+      bbs:
+        client_cert: (( merge ))
+        client_key: (( merge ))
     bbs:
       sql:
         db_password: (( merge || nil ))
@@ -282,8 +285,6 @@ properties:
       ca_cert: (( merge ))
       server_cert: (( merge || nil ))
       server_key: (( merge || nil ))
-      client_cert: (( merge ))
-      client_key: (( merge ))
       auctioneer:
         ca_cert: (( merge ))
         client_cert: (( merge || nil ))

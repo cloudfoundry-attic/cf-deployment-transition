@@ -9,10 +9,10 @@
   path: /locket_database_password
 
 - type: remove
-  path: /properties/diego/bbs/client_key
+  path: /properties/diego/auctioneer/bbs/client_key
 
 - type: remove
-  path: /properties/diego/bbs/client_cert
+  path: /properties/diego/auctioneer/bbs/client_cert
 
 - type: remove
   path: /properties/diego/locket
