@@ -11,9 +11,9 @@ cc_bridge_tps:
   certificate: cc-bridge-tps-cert
   private_key: cc-bridge-tps-key
 cc_bulk_api_password: cc-bulk-api-password
-cc_database_password: steve-is-awesome
-cc_database_username: steve-staylor
 cc_db_encryption_key: some_encrypt_key
+cc_db_password: steve-is-awesome
+cc_db_username: steve-staylor
 cc_internal_api_password: steve-is-great
 cc_staging_upload_password: steve
 cc_tls:
