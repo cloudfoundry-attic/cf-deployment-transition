@@ -54,6 +54,11 @@ download the latest binary [here][spiff-releases],
 extract it from its tarball,
 and put it on your path.
 
+If you already have `spiff` installed,
+please check that you have at least version 1.0.8.
+You can use `spiff --version` to check
+if an upgrade is necessary.
+
 #### Dependencies: CA Private Key Stub File
 `cf-deployment`-based deployments use
 the v2 `bosh` CLI or [Credhub](https://github.com/cloudfoundry-incubator/credhub)
