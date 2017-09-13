@@ -8,6 +8,9 @@
   path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/routing_api_client
 
 - type: remove
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/tcp_router
+
+- type: remove
   path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/routing_api
 
 - type: remove
@@ -17,7 +20,13 @@
   path: /instance_groups/name=router/jobs/name=gorouter/properties/routing_api
 
 - type: remove
+  path: /instance_groups/name=tcp-router
+
+- type: remove
   path: /variables/name=routing_api_database_password
+
+- type: remove
+  path: /variables/name=uaa_clients_tcp_router_secret
 
 - type: remove
   path: /variables/name=uaa_clients_routing_api_client_secret
