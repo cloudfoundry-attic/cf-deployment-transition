@@ -17,6 +17,9 @@
   path: /instance_groups/name=cc-worker/jobs/name=cloud_controller_worker/properties/routing_api
 
 - type: remove
+  path: /instance_groups/name=cc-clock/jobs/name=cloud_controller_clock/properties/routing_api
+
+- type: remove
   path: /instance_groups/name=router/jobs/name=gorouter/properties/routing_api
 
 - type: remove
