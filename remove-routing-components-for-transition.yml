@@ -26,9 +26,6 @@
   path: /instance_groups/name=tcp-router
 
 - type: remove
-  path: /variables/name=routing_api_database_password
-
-- type: remove
   path: /variables/name=uaa_clients_tcp_router_secret
 
 - type: remove
