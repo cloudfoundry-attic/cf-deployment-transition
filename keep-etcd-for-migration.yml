@@ -3,7 +3,8 @@
 - type: replace
   path: /instance_groups/name=etcd?
   value:
-    migrated_from: {name: etcd_z1, az: z1}
+    migrated_from:
+    - {name: etcd_z1, az: z1}
     name: etcd
     azs:
     - z1
