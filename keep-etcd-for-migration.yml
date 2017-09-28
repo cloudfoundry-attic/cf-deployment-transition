@@ -1,5 +1,5 @@
 ---
-# Add a single etcd instance
+# Add a single etcd instance at a static IP address
 - type: replace
   path: /instance_groups/name=etcd?
   value:
@@ -16,6 +16,7 @@
       max_in_flight: 1
     networks:
     - name: default
+      static_ips: ((etcd_static_ips))
     jobs:
     - name: consul_agent
       release: consul

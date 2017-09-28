@@ -13,11 +13,6 @@
     - {name: nats_z2, az: z2}
 
 - type: replace
-  path: /instance_groups/name=etcd/migrated_from?
-  value:
-    - {name: etcd_z1, az: z1}
-
-- type: replace
   path: /instance_groups/name=uaa/migrated_from?
   value:
     - {name: uaa_z1, az: z1}
