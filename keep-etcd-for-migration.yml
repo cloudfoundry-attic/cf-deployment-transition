@@ -4,10 +4,10 @@
   path: /instance_groups/name=etcd?
   value:
     migrated_from:
-    - {name: etcd_z1, az: z1}
+    - {name: etcd_z2, az: z2}
     name: etcd
     azs:
-    - z1
+    - z2
     instances: 1
     persistent_disk_type: 5GB
     vm_type: minimal
