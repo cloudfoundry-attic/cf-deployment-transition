@@ -23,13 +23,11 @@
   path: /instance_groups/name=etcd?
   value:
     migrated_from:
-    - {name: etcd_z1, az: z1}
     - {name: etcd_z2, az: z2}
     name: etcd
     azs:
-    - z1
     - z2
-    instances: 3
+    instances: 1
     persistent_disk_type: 5GB
     vm_type: minimal
     stemcell: default
@@ -60,7 +58,7 @@
         etcd:
           advertise_urls_dns_suffix: cf-etcd.service.cf.internal
           cluster:
-          - instances: 3
+          - instances: 1
             name: etcd
           peer_require_ssl: true
           require_ssl: true
