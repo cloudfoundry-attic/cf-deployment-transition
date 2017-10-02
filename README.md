@@ -24,7 +24,7 @@ The included tools are:
   so that they are not moved or recreated
   during the transition.
   Deployers must provide the IP addresses.
-- `keep-etcd-for-migration.yml`: Adds a single instance
+- `keep-etcd-for-transition.yml`: Adds a single instance
 of `etcd`
 to cf-deployment
 for the purpose of transition.
