@@ -30,6 +30,10 @@ to cf-deployment
 for the purpose of transition.
 This opsfile also holds `etcd` at a static IP address.
 Deployers must provide the IP address.
+- `keep-syslog-drain-binder-for-transition.yml`: Retains the `syslog_drain_binder` job
+on the `doppler` instance_group
+and properties.
+Requires `keep-etcd-for-transition.yml`.
 
 ## Tools
 

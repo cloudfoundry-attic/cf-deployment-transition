@@ -1,0 +1,40 @@
+---
+- type: replace
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/loggregator/disable_syslog_drains?
+  value: false
+
+- type: replace
+  path: /instance_groups/name=doppler/jobs/-
+  value:
+    name: syslog_drain_binder
+    release: loggregator
+    properties:
+      loggregator:
+        tls:
+          syslogdrainbinder:
+            cert: "((loggregator_tls_syslogdrainbinder.certificate))"
+            key: "((loggregator_tls_syslogdrainbinder.private_key))"
+        etcd:
+          require_ssl: true
+          ca_cert: "((etcd_server.ca))"
+          machines:
+          - cf-etcd.service.cf.internal
+      syslog_drain_binder:
+        etcd:
+          client_cert: "((etcd_client.certificate))"
+          client_key: "((etcd_client.private_key))"
+      system_domain: "((system_domain))"
+      cc:
+        mutual_tls:
+          ca_cert: "((loggregator_tls_syslogdrainbinder.ca))"
+      ssl:
+        skip_cert_verify: true
+
+- type: replace
+  path: /variables/-
+  value:
+    name: loggregator_tls_syslogdrainbinder
+    type: certificate
+    options:
+      ca: service_cf_internal_ca
+      common_name: syslogdrainbinder
