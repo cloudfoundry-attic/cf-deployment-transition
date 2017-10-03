@@ -1,0 +1,34 @@
+---
+- type: replace
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/loggregator/disable_syslog_drains?
+  value: false
+
+- type: remove
+  path: /instance_groups/name=doppler/jobs/name=adapter
+
+- type: remove
+  path: /instance_groups/name=log-api/jobs/name=consul_agent/properties/consul/agent/services/reverse_log_proxy
+
+- type: remove
+  path: /instance_groups/name=log-api/jobs/name=reverse_log_proxy
+
+- type: remove
+  path: /instance_groups/name=scheduler/jobs/name=scheduler
+
+- type: remove
+  path: /variables/name=loggregator_tls_rlp
+
+- type: remove
+  path: /variables/name=adapter_rlp_tls
+
+- type: remove
+  path: /variables/name=scheduler_api_tls
+
+- type: remove
+  path: /variables/name=adapter_tls
+
+- type: remove
+  path: /variables/name=scheduler_client_tls
+
+- type: remove
+  path: /releases/name=cf-syslog-drain

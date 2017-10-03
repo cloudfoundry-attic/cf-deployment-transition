@@ -34,6 +34,11 @@ Deployers must provide the IP address.
 on the `doppler` instance_group
 and properties.
 Requires `keep-etcd-for-transition.yml`.
+- `opt-out-of-cf-syslog-drain-release-for-transition.yml`: Removes `cf-syslog-drain` components
+from cf-deployment.  Intended to be used in conjunction with `keep-syslog-drain-binder-for-transition.yml`
+to continue using syslog drain
+while minimizing the number of duplicate messages logged
+during the transition deployments.
 
 ## Tools
 
