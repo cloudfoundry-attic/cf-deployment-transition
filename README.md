@@ -30,6 +30,11 @@ to cf-deployment
 for the purpose of transition.
 This opsfile also holds `etcd` at a static IP address.
 Deployers must provide the IP address.
+- `rename-etcd-network.yml`: Allows renaming
+of the `etcd`
+instance's network
+added by using `keep-etcd-for-transition.yml`.
+Deployers must provide the name.
 - `keep-syslog-drain-binder-for-transition.yml`: Retains the `syslog_drain_binder` job
 on the `doppler` instance_group
 and properties.
