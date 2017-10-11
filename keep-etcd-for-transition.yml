@@ -18,9 +18,9 @@
     machines:
     - cf-etcd.service.cf.internal
 
-# Add a single etcd instance at a static IP address
+# Add a single etcd instance at a static IP address before doppler
 - type: replace
-  path: /instance_groups/name=etcd?
+  path: /instance_groups/name=doppler:before
   value:
     migrated_from:
     - {name: etcd_z2, az: z2}
