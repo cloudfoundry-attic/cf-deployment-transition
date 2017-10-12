@@ -19,11 +19,6 @@ The included tools are:
 - `remove-routing-components-for-transition.yml`: Opts out of the Routing applied
   so that deployers can migration without also adding the Routing API and TCP Router
   or their dependencies.
-- `hold-static-ips.yml`: Holds `consul` and `nats` instances
-  at a static IP address
-  so that they are not moved or recreated
-  during the transition.
-  Deployers must provide the IP addresses.
 - `keep-etcd-for-transition.yml`: Adds a single instance
 of `etcd`
 to cf-deployment
