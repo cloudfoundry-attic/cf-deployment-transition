@@ -74,14 +74,16 @@ so we have provided opsfiles
 to minimize changes during the transition.
 
 In `cf-deployment-transition`:
+
 | Name | Purpose | Required variables |
-| --- | --- | -- |
+| --- | --- | --- |
  [`cfr-to-cfd.yml`](cfr-to-cfd.yml) |  `cf-deployment` places jobs in `instance_groups` that scale similarly.  However, these are different from where they exist in `cf-release`.  Therefore, this opsfile tells `bosh` to migrate the jobs from the new to the old `instance_groups`. | none |
 | [`keep-etcd-for-transition.yml`](keep-etcd-for-transition.yml) | `cf-deployment` no longer uses `etcd`, but `cf-release` still requires it.  This opsfie keeps a single `etcd` instance for the transition.  Once the transition has been performed, `etcd` will be deleted. | `etcd_static_ips`: (Array) an array with a single entry - the IP address of the current `etcd_z2` instance. |
 
 In `cf-deployment`:
+
 | Name | Purpose | Required variables |
-| --- | --- | -- |
+| --- | --- | --- |
 | [`operations/legacy/keep-static-ips.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/legacy/keep-static-ips.yml) | Holds consul and nats instances at a static IP address. | `consul_static_ips`: (Array) the IPs of the current `consul` instances.<br />`nats_static_ips`: (Array) the IPs of the current `nats` instances. |
 | [`operations/legacy/keep-original-internal-usernames.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/legacy/keep-original-internal-usernames.yml) | Maintains operator-provided usernames. | Provides ability to set (String) values for `properties.nats.user`, `properties.cc.staging_upload_user`, `properties.router.status.user` |
 
