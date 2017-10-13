@@ -107,9 +107,21 @@ To enable these features
 with `cf-deployment`,
 the opsfiles needed are
 `aws.yml`, `use-s3-blobstore.yml`, and `use-external-dbs.yml`
-(see [opsfile documentation](https://github.com/cloudfoundry/cf-deployment/tree/master/operations#ops-files))
+(see [opsfile documentation](https://github.com/cloudfoundry/cf-deployment/tree/master/operations#ops-files)).
 Also of note is that `cf-deployment`
 has one required variable: `system_domain`.
+
+(For other IaaSes
+and datastore setups,
+you'll need to use other ops-files,
+or potentially write your own,
+to achieve similar changes.
+cf-deployment includes ops-files
+for [Azure](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/aws.yml)
+and [Openstack](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/openstack.yml),
+while GCP and vSphere work without any ops-files.
+Whatever your blobstore and database solutions are,
+be sure to account for those as well.)
 
 A typical transition deployment `bosh deploy` command looks like:
 ```
