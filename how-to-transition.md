@@ -16,14 +16,14 @@ consult the [README](README.md)
 1. [Deleting the `diego` deployment](#delete-diego)
 1. [Deleting the `routing` deployment](#delete-routing)
 
-## <a id="prerequisites"></a> `0:` Satisfying prerequisites
+## <a id="prerequisites"></a> Step 0: Satisfying prerequisites
 
 Please see the [prerequisites section of the README](README.md#prerequisites).
 This guide assumes that
 all of the listed prerequisites
 have been satisfied.
 
-## <a id="vars-store-extraction"></a> `1:` Extracting the `vars-store`
+## <a id="vars-store-extraction"></a> Step 1: Extracting the `vars-store`
 
 In order for the transition
 to work seamlessly,
@@ -65,20 +65,25 @@ from the appropriate manifests:
 
 If you do not extract credentials properly, they will be **regenerated** when you deploy `cf-deployment`.
 
-## <a id="transition-deployment"></a> `2:` Deploying with necessary opsfiles
+## <a id="transition-deployment"></a> Step 2: Deploying with necessary opsfiles
 
 There are differences between
 `cf-release` and `cf-deployment`
 that would lead to disruption,
 so we have provided opsfiles
-to minimize changes during the transition:
+to minimize changes during the transition.
 
-| Repository | Name | Purpose | Required variables |
-| --- | --- | --- | -- |
-| `cf-deployment-transition` | `cfr-to-cfd.yml` |  `cf-deployment` places jobs in `instance_groups` that scale similarly.  However, these are different from where they exist in `cf-release`.  Therefore, this opsfile tells `bosh` to migrate the jobs from the new to the old `instance_groups`. | none |
-| | `keep-etcd-for-transition.yml` | `cf-deployment` no longer uses `etcd`, but `cf-release` still requires it.  This opsfie keeps a single `etcd` instance for the transition.  Once the transition has been performed, `etcd` will be deleted. | `etcd_static_ips`: (Array) an array with a single entry - the IP address of the current `etcd_z2` instance. |
-|`cf-deployment` | `operations/legacy/keep-static-ips.yml` | Holds consul and nats instances at a static IP address. | `consul_static_ips`: (Array) the IPs of the current `consul` instances.<br />`nats_static_ips`: (Array) the IPs of the current `nats` instances. |
-| | `operations/legacy/keep-original-internal-usernames.yml` | Maintains operator-provided usernames. | Provides ability to set (String) values for `properties.nats.user`, `properties.cc.staging_upload_user`, `properties.router.status.user` |
+In `cf-deployment-transition`:
+| Name | Purpose | Required variables |
+| --- | --- | -- |
+ [`cfr-to-cfd.yml`](cfr-to-cfd.yml) |  `cf-deployment` places jobs in `instance_groups` that scale similarly.  However, these are different from where they exist in `cf-release`.  Therefore, this opsfile tells `bosh` to migrate the jobs from the new to the old `instance_groups`. | none |
+| [`keep-etcd-for-transition.yml`](keep-etcd-for-transition.yml) | `cf-deployment` no longer uses `etcd`, but `cf-release` still requires it.  This opsfie keeps a single `etcd` instance for the transition.  Once the transition has been performed, `etcd` will be deleted. | `etcd_static_ips`: (Array) an array with a single entry - the IP address of the current `etcd_z2` instance. |
+
+In `cf-deployment`:
+| Name | Purpose | Required variables |
+| --- | --- | -- |
+| [`operations/legacy/keep-static-ips.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/legacy/keep-static-ips.yml) | Holds consul and nats instances at a static IP address. | `consul_static_ips`: (Array) the IPs of the current `consul` instances.<br />`nats_static_ips`: (Array) the IPs of the current `nats` instances. |
+| [`operations/legacy/keep-original-internal-usernames.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/legacy/keep-original-internal-usernames.yml) | Maintains operator-provided usernames. | Provides ability to set (String) values for `properties.nats.user`, `properties.cc.staging_upload_user`, `properties.router.status.user` |
 
 We will assume for
 this guide
@@ -111,7 +116,7 @@ bosh deploy -d cf \
 cf-deployment/cf-deployment.yml
 ```
 
-## <a id="remove-etcd"></a> `3:` Removing `etcd`
+## <a id="remove-etcd"></a> Step 3: Removing `etcd`
 
 Perform another `bosh deploy` command,
 using most of the same arguments
@@ -123,7 +128,7 @@ Future deployments
 should continue to omit these arguments
 as they were only used for the transition.
 
-## <a id="delete-diego"></a> `4:` Deleting the `diego` deployment
+## <a id="delete-diego"></a> Step 4: Deleting the `diego` deployment
 
 `cf-deployment` unifies `cf-release` and `diego-release`
 into a single deployment
@@ -141,7 +146,7 @@ The command for this is
 bosh -d <your-diego-deployment> delete-deployment
 ```
 
-## <a id="delete-routing"></a> `5:` Deleting the `routing` deployment
+## <a id="delete-routing"></a> Step 5: Deleting the `routing` deployment
 
 `cf-deployment` unifies `cf-release` and `routing-release`
 into a single deployment
