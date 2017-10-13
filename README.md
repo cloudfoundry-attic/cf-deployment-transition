@@ -1,4 +1,5 @@
 # Transition
+### [Step-by-step guide](how-to-transition.md) to transitioning from `cf-release` to `cf-deployment`
 
 **The tools in this repo
 have not been tested
@@ -74,7 +75,7 @@ please check that you have at least version 1.0.8.
 You can use `spiff --version` to check
 if an upgrade is necessary.
 
-#### Dependencies: CA Private Key Stub File
+#### <a id="ca-keys"></a> Dependencies: CA Private Key Stub File
 `cf-deployment`-based deployments use
 the v2 `bosh` CLI or [Credhub](https://github.com/cloudfoundry-incubator/credhub)
 to manage deployment credentials,
@@ -121,7 +122,7 @@ all other appropriate ops-files
 and in conjunction with the ops-file
 to scale down etcd for cluster changes.
 
-## Migration Prerequisites
+## <a id="prerequisites"></a> Migration Prerequisites
 To migrate to cf-deployment
 with the tools and process we've designed and tested
 so far,
