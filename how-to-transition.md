@@ -9,6 +9,12 @@ For additional details
 about the transition in general,
 consult the [README](README.md)
 
+Please feel free
+to reach out to us for assistance
+on Slack
+in the `#cf-deployment` channel
+at https://cloudfoundry.slack.com.
+
 0. [Satisfying prerequisites](#prerequisites)
 1. [Extracting the `vars-store`](#vars-store-extraction)
 1. [Deploying with necessary opsfiles](#transition-deployment)
@@ -63,7 +69,12 @@ from the appropriate manifests:
 | `r` | `routing-release` |
 | `Q` | `locket` |
 
-If you do not extract credentials properly, they will be **regenerated** when you deploy `cf-deployment`.
+If you do not extract credentials properly,
+they will be **regenerated**
+when you deploy `cf-deployment`.
+This may lead to downtime,
+failed deployment,
+or other issues.
 
 ## <a id="transition-deployment"></a> Step 2: Deploying with necessary opsfiles
 
@@ -78,7 +89,7 @@ In `cf-deployment-transition`:
 | Name | Purpose | Required variables |
 | --- | --- | --- |
  [`cfr-to-cfd.yml`](cfr-to-cfd.yml) |  `cf-deployment` places jobs in `instance_groups` that scale similarly.  However, these are different from where they exist in `cf-release`.  Therefore, this opsfile tells `bosh` to migrate the jobs from the new to the old `instance_groups`. | none |
-| [`keep-etcd-for-transition.yml`](keep-etcd-for-transition.yml) | `cf-deployment` no longer uses `etcd`, but `cf-release` still requires it.  This opsfie keeps a single `etcd` instance for the transition.  Once the transition has been performed, `etcd` will be deleted. | `etcd_static_ips`: (Array) an array with a single entry - the IP address of the current `etcd_z2` instance. |
+| [`keep-etcd-for-transition.yml`](keep-etcd-for-transition.yml) | `cf-deployment` no longer uses `etcd`, but `cf-release` still requires it.  This opsfile keeps a single `etcd` instance for the transition.  Once the transition has been performed, `etcd` will be deleted. | `etcd_static_ips`: (Array) an array with a single entry - the IP address of the current `etcd_z2` instance. |
 
 In `cf-deployment`:
 

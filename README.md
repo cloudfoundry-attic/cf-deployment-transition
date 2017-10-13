@@ -127,6 +127,8 @@ To migrate to cf-deployment
 with the tools and process we've designed and tested
 so far,
 you'll need to fulfill a number of requirements:
+- You have [`v2.0.42`](https://github.com/cloudfoundry/bosh-cli/releases/tag/v2.0.42)
+or higher of the `bosh` cli
 - You have existing deployments of
   `cf-release`
   and
