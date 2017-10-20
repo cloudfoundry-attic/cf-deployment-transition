@@ -17,6 +17,7 @@ at https://cloudfoundry.slack.com.
 
 0. [Satisfying prerequisites](#prerequisites)
 1. [Extracting the `vars-store`](#vars-store-extraction)
+1. [Choosing transition options](#transition-options)
 1. [Deploying with necessary opsfiles](#transition-deployment)
 1. [Removing `etcd`](#remove-etcd)
 1. [Deleting the `diego` deployment](#delete-diego)
@@ -76,7 +77,15 @@ This may lead to downtime,
 failed deployment,
 or other issues.
 
-## <a id="transition-deployment"></a> Step 2: Deploying with necessary opsfiles
+## <a id="transition-options"></a> Step 2: Choosing transition options
+
+Determine which
+optional opsfiles
+you need to include
+based on your requirements:
+[Trasition Options](transition-options.md)
+
+## <a id="transition-deployment"></a> Step 3: Deploying with necessary opsfiles
 
 There are differences between
 `cf-release` and `cf-deployment`
@@ -141,7 +150,7 @@ bosh deploy -d cf \
 cf-deployment/cf-deployment.yml
 ```
 
-## <a id="remove-etcd"></a> Step 3: Removing `etcd`
+## <a id="remove-etcd"></a> Step 4: Removing `etcd`
 
 Perform another `bosh deploy` command,
 using most of the same arguments
@@ -153,7 +162,7 @@ Future deployments
 should continue to omit these arguments
 as they were only used for the transition.
 
-## <a id="delete-diego"></a> Step 4: Deleting the `diego` deployment
+## <a id="delete-diego"></a> Step 5: Deleting the `diego` deployment
 
 `cf-deployment` unifies `cf-release` and `diego-release`
 into a single deployment
@@ -171,7 +180,7 @@ The command for this is
 bosh -d <your-diego-deployment> delete-deployment
 ```
 
-## <a id="delete-routing"></a> Step 5: Deleting the `routing` deployment
+## <a id="delete-routing"></a> Step 6: Deleting the `routing` deployment
 
 `cf-deployment` unifies `cf-release` and `routing-release`
 into a single deployment
