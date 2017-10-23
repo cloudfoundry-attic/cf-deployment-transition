@@ -80,17 +80,6 @@
             ca_cert: "((etcd_server.ca))"
             client_cert: "((etcd_client.certificate))"
             client_key: "((etcd_client.private_key))"
-    - name: metron_agent
-      release: loggregator
-      properties:
-        metron_endpoint:
-          shared_secret: "((dropsonde_shared_secret))"
-        loggregator:
-          tls:
-            ca_cert: "((loggregator_tls_metron.ca))"
-            metron:
-              cert: "((loggregator_tls_metron.certificate))"
-              key: "((loggregator_tls_metron.private_key))"
 
 - type: replace
   path: /variables/name=etcd_ca?
