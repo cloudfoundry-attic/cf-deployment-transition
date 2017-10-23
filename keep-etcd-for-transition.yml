@@ -83,8 +83,6 @@
     - name: metron_agent
       release: loggregator
       properties:
-        metron_agent:
-          deployment: "((system_domain))"
         metron_endpoint:
           shared_secret: "((dropsonde_shared_secret))"
         loggregator:
