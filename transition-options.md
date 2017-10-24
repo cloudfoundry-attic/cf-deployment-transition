@@ -2,7 +2,7 @@
 
 Depending on your
 current deployment of Cloud Foundry,
-there may be componenet differences
+there may be component differences
 between cf-release and cf-deployment.
 
 There are some decisions to can make
