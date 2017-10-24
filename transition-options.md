@@ -21,7 +21,12 @@ in your existing cf-release based deployment,
 you must decide
 whether you want to introduce the
 routing components
-as part of your transition,
+as part of your transition.
+One of the routing components
+-- the Routing API --
+requires an additional database,
+so some operator work will be required to deploy it.
+Operators may either set up the necessary database,
 or use `remove-routing-components-for-transition.yml`
 to postpone this step.
 You will need to apply
@@ -36,7 +41,12 @@ in your existing cf-release based deployment,
 you must decide
 whether you want to introduce the
 networking components
-as part of your transition,
+as part of your transition.
+Some networking components
+-- the `policy-server` and `silk-controller` --
+require an additional databases,
+so some operator work will be required to deploy them.
+Operators may either set up the necessary databases,
 or use `remove-cf-networking-for-transition.yml`
 to postpone this step.
 You will need to apply
