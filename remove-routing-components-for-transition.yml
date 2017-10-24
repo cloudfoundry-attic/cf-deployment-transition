@@ -30,3 +30,6 @@
 
 - type: remove
   path: /variables/name=uaa_clients_routing_api_client_secret
+
+- type: remove
+  path: /variables/name=diego_locket_client
