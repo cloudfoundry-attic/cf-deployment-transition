@@ -83,7 +83,7 @@ Determine which
 optional opsfiles
 you need to include
 based on your requirements:
-[Trasition Options](transition-options.md)
+[Transition Options](transition-options.md)
 
 ## <a id="transition-deployment"></a> Step 3: Deploying with necessary opsfiles
 
