@@ -106,6 +106,7 @@ In `cf-deployment`:
 | --- | --- | --- |
 | [`operations/legacy/keep-static-ips.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/legacy/keep-static-ips.yml) | Holds consul and nats instances at a static IP address. | `consul_static_ips`: (Array) the IPs of the current `consul` instances.<br />`nats_static_ips`: (Array) the IPs of the current `nats` instances. |
 | [`operations/legacy/keep-original-internal-usernames.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/legacy/keep-original-internal-usernames.yml) | Maintains operator-provided usernames. | Provides ability to set (String) values for `properties.nats.user`, `properties.cc.staging_upload_user`, `properties.router.status.user` |
+| [`operations/set-bbs-active-key.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/set-bbs-active-key.yml) | Maintains current `bbs` active encryption key. | Sets the active key label to the value of `diego_bbs_active_key_label`, which is extracted from the `diego-release`-based manifest in step 1. |
 
 We will assume for
 this guide
@@ -146,6 +147,7 @@ bosh deploy -d cf \
 -l static-ip-vars.yml \
 -o cf-deployment-transition/keep-etcd-for-transition.yml \
 -l etcd-ips.yml \
+-o cf-deployment/operations/set-bbs-active-key.yml \
 -o cf-deployment-transition/cfr-to-cfd.yml \
 cf-deployment/cf-deployment.yml
 ```
