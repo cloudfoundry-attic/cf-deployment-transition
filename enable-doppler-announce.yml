@@ -1,0 +1,20 @@
+---
+# For the migration, restore doppler's behavior of announcing themselves via etcd
+- type: replace
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/doppler/disable_announce?
+  value: false
+
+- type: replace
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/doppler/etcd?
+  value:
+    client_cert: "((etcd_client.certificate))"
+    client_key: "((etcd_client.private_key))"
+
+- type: replace
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/loggregator/etcd?
+  value:
+    require_ssl: true
+    ca_cert: "((etcd_server.ca))"
+    machines:
+    - cf-etcd.service.cf.internal
+
