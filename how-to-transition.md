@@ -19,6 +19,7 @@ at https://cloudfoundry.slack.com.
 1. [Extracting the `vars-store`](#vars-store-extraction)
 1. [Choosing transition options](#transition-options)
 1. [Deploying with necessary opsfiles](#transition-deployment)
+1. [Migrating away from static IPs for `consul` and `nats`](#migrate-from-static-ips)
 1. [Removing `etcd`](#remove-etcd)
 1. [Deleting the `diego` deployment](#delete-diego)
 1. [Deleting the `routing` deployment](#delete-routing)
@@ -152,7 +153,18 @@ bosh deploy -d cf \
 cf-deployment/cf-deployment.yml
 ```
 
-## <a id="remove-etcd"></a> Step 4: Removing `etcd`
+## <a id="migrate-from-static-ips"></a> Step 4: Migrating away from static IPs for `consul` and `nats`
+
+Modify the static IP ranges in cloud config
+to exclude the IPs used by `nats` and `consul`
+as specified in the `static-ip-vars.yml`.
+Then perform a `bosh deploy`,
+using the same arguments as the step above
+but omitting the `keep-static-ips.yml`
+and `static-ip-vars.yml`.
+Future deployments should omit these arguments as well.
+
+## <a id="remove-etcd"></a> Step 5: Removing `etcd`
 
 Perform another `bosh deploy` command,
 using most of the same arguments
@@ -164,7 +176,7 @@ Future deployments
 should continue to omit these arguments
 as they were only used for the transition.
 
-## <a id="delete-diego"></a> Step 5: Deleting the `diego` deployment
+## <a id="delete-diego"></a> Step 6: Deleting the `diego` deployment
 
 `cf-deployment` unifies `cf-release` and `diego-release`
 into a single deployment
@@ -182,7 +194,7 @@ The command for this is
 bosh -d <your-diego-deployment> delete-deployment
 ```
 
-## <a id="delete-routing"></a> Step 6: Deleting the `routing` deployment
+## <a id="delete-routing"></a> Step 7: Deleting the `routing` deployment
 
 `cf-deployment` unifies `cf-release` and `routing-release`
 into a single deployment
