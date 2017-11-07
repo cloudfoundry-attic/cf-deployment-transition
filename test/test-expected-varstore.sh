@@ -3,6 +3,10 @@
 root_dir=$PWD/$(dirname $0)
 examples_failed=0
 
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NOCOLOR='\033[0m'
+
 DESCRIBE="When on the happy journey"
   IT="makes a cf-deployment vars store from source manifests"
     pushd $(mktemp -d) > /dev/null
@@ -15,9 +19,9 @@ DESCRIBE="When on the happy journey"
       status=$?
 
       if [ "$status" == "0" ]; then
-        echo PASS - ${IT}
+        echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
       else
-        echo FAIL - ${IT}
+        echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
         examples_failed=1
       fi
     popd > /dev/null
@@ -33,9 +37,9 @@ DESCRIBE="When on the happy journey"
       status=$?
 
       if [ "$status" == "0" ]; then
-        echo PASS - ${IT}
+        echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
       else
-        echo FAIL - ${IT}
+        echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
         examples_failed=1
       fi
     popd > /dev/null
@@ -52,9 +56,9 @@ DESCRIBE="When on the happy journey"
       status=$?
 
       if [ "$status" == "0" ]; then
-        echo PASS - ${IT}
+        echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
       else
-        echo FAIL - ${IT}
+        echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
         examples_failed=1
       fi
     popd > /dev/null
@@ -71,9 +75,9 @@ DESCRIBE="When on the happy journey"
       status=$?
 
       if [ "$status" == "0" ]; then
-        echo PASS - ${IT}
+        echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
       else
-        echo FAIL - ${IT}
+        echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
         examples_failed=1
       fi
     popd > /dev/null
@@ -91,9 +95,9 @@ DESCRIBE="When on the happy journey"
       status=$?
 
       if [ "$status" == "0" ]; then
-        echo PASS - ${IT}
+        echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
       else
-        echo FAIL - ${IT}
+        echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
         examples_failed=1
       fi
     popd > /dev/null
@@ -110,18 +114,18 @@ DESCRIBE="When on the happy journey"
       status=$?
 
       if [ "$status" == "0" ]; then
-        echo PASS - ${IT}
+        echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
       else
-        echo FAIL - ${IT}
+        echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
         examples_failed=1
       fi
     popd > /dev/null
 
 if [[ "${examples_failed}" > 0 ]]; then
-  echo ${DESCRIBE} FAILED!
+  echo -e ${DESCRIBE} ${RED} FAILED! ${NOCOLOR}
   exit 1
 else
-  echo ${DESCRIBE} PASSED!
+  echo -e ${DESCRIBE} ${GREEN} PASSED! ${NOCOLOR}
   exit 0
 fi
 

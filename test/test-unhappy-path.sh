@@ -4,6 +4,10 @@ DESCRIBE="Unhappy path"
   examples_failed=0
   root_dir=$(dirname $0)
 
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NOCOLOR='\033[0m'
+
 # Tests
 IT="exits 1 with a helpful message if no CA keys are specified"
   output=$(${root_dir}/../extract-vars-store-from-manifests.sh \
@@ -12,18 +16,18 @@ IT="exits 1 with a helpful message if no CA keys are specified"
   exit_code=$?
   expected_output=""
   if [ "$exit_code" == "1" ]; then
-    echo PASS - ${IT}
+    echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
   else
     examples_failed=1
-    echo FAIL - ${IT}
+    echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
   fi
 
 IT="has a helpful message if no CA keys are specified"
-  if echo "${output}" | grep -q "Certificate Authority Key stub" ; then
-    echo PASS - ${IT}
+  if echo -e "${output}" | grep -q "Certificate Authority Key stub" ; then
+    echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
   else
     examples_failed=1
-    echo FAIL - ${IT} - expected "${output}" to == "${expected_output}"
+    echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - expected "${output}" to == "${expected_output}"
   fi
 
 IT="exits 1 with a helpful message if no CF manifest is specified"
@@ -32,18 +36,18 @@ IT="exits 1 with a helpful message if no CF manifest is specified"
   exit_code=$?
   expected_output=""
   if [ "$exit_code" == "1" ]; then
-    echo PASS - ${IT}
+    echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
   else
     examples_failed=1
-    echo FAIL - ${IT}
+    echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
   fi
 
 IT="has a helpful message if no CF manifest is specified"
-  if echo "${output}" | grep -q "CF manifest" ; then
-    echo PASS - ${IT}
+  if echo -e "${output}" | grep -q "CF manifest" ; then
+    echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
   else
     examples_failed=1
-    echo FAIL - ${IT} - expected "${output}" to == "${expected_output}"
+    echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - expected "${output}" to == "${expected_output}"
   fi
 
 IT="exits 1 if no diego manifest is specified"
@@ -52,18 +56,18 @@ IT="exits 1 if no diego manifest is specified"
   exit_code=$?
   expected_output=""
   if [ "$exit_code" == "1" ]; then
-    echo PASS - ${IT}
+    echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
   else
     examples_failed=1
-    echo FAIL - ${IT}
+    echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
   fi
 
 IT="has a helpful message if no Diego manifest is specified"
-  if echo "${output}" | grep -q "Diego manifest" ; then
-    echo PASS - ${IT}
+  if echo -e "${output}" | grep -q "Diego manifest" ; then
+    echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
   else
     examples_failed=1
-    echo FAIL - ${IT} - expected "${output}" to == "${expected_output}"
+    echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - expected "${output}" to == "${expected_output}"
   fi
 
 IT="has a helpful message if any CA keys are missing"
@@ -76,11 +80,11 @@ IT="has a helpful message if any CA keys are missing"
       -cf ${root_dir}/fixture/source-cf-manifest.yml \
       -d ${root_dir}/fixture/source-diego-manifest.yml \
       -ca ${missing_one_ca_file} 2> /dev/null)
-    if echo "${output}" | grep -q -e "$item .* not found in"; then
-      echo PASS - ${IT} - ${item}
+    if echo -e "${output}" | grep -q -e "$item .* not found in"; then
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - ${item}
     else
       examples_failed=1
-      echo FAIL - ${IT} - ${item}
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - ${item}
     fi
   done
 
@@ -108,17 +112,17 @@ function test_cf_networking_variable_extraction() {
 
   IT="exits 1 if network-related properties are missing when -N is supplied"
     if [ "$exit_code" == "1" ]; then
-      echo PASS - ${IT} - $required_property
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - $required_property
     else
       examples_failed=1
-      echo FAIL - ${IT} - $required_property
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - $required_property
     fi
   IT="has a helpful message if network-related properties are missing when -N is supplied"
-    if echo "${error_output}" | grep -q -e $error_message ; then
-      echo PASS - ${IT} - $required_property
+    if echo -e "${error_output}" | grep -q -e $error_message ; then
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - $required_property
     else
       examples_failed=1
-      echo FAIL - ${IT} - $required_property
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - $required_property
     fi
 }
 
@@ -160,17 +164,17 @@ function test_routing_deployment_variable_extraction() {
   exit_code=$?
   IT="exits 1 if routing-related properties are missing when -r is supplied"
     if [ "$exit_code" == "1" ]; then
-      echo PASS - ${IT} - $required_property
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - $required_property
     else
       examples_failed=1
-      echo FAIL - ${IT} - $required_property
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - $required_property
     fi
   IT="has a helpful message if routing-related properties are missing when -r is supplied"
-    if echo "${error_output}" | grep -q -e $error_message ; then
-      echo PASS - ${IT} - $required_property
+    if echo -e "${error_output}" | grep -q -e $error_message ; then
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - $required_property
     else
       examples_failed=1
-      echo FAIL - ${IT} - $required_property
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - $required_property
     fi
 }
 
@@ -181,7 +185,7 @@ test_routing_deployment_variable_extraction "uaa-routing-api-secret" "uaa_client
 CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)
   grep -v policy_server_ca_key < ${root_dir}/fixture/ca-private-keys.yml > ${missing_a_private_key}
-  echo "${CONTEXT}:"
+  echo -e "${CONTEXT}:"
   error_output="$(${root_dir}/../extract-vars-store-from-manifests.sh \
     -cf ${root_dir}/fixture/source-cf-manifest.yml \
     -d  ${root_dir}/fixture/source-diego-manifest.yml \
@@ -191,17 +195,17 @@ CONTEXT="CF networking private keys"
   exit_code=$?
   IT="should require private keys for cf networking CAs when -N is specified"
     if [ "$exit_code" == "1" ]; then
-      echo PASS - ${IT} - policy_server_ca_key
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - policy_server_ca_key
     else
       examples_failed=1
-      echo FAIL - ${IT} - policy_server_ca_key
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - policy_server_ca_key
     fi
   IT="should have a helpful message when private keys for cf networking CAs are missing"
-    if echo "${error_output}" | grep -q -e "policy_server_ca.private_key" ; then
-      echo PASS - ${IT} - policy_server_ca_key
+    if echo -e "${error_output}" | grep -q -e "policy_server_ca.private_key" ; then
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - policy_server_ca_key
     else
       examples_failed=1
-      echo FAIL - ${IT} - policy_server_ca_key
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - policy_server_ca_key
     fi
 
 function test_locket_variable_extraction() {
@@ -227,17 +231,17 @@ function test_locket_variable_extraction() {
 
   IT="exits 1 if locket properties are missing when -Q is supplied"
     if [ "$exit_code" == "1" ]; then
-      echo PASS - ${IT} - $required_property
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - $required_property
     else
       examples_failed=1
-      echo FAIL - ${IT} - $required_property
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - $required_property
     fi
   IT="has a helpful message if locket properties are missing when -Q is supplied"
-    if echo "${error_output}" | grep -q -e $error_message ; then
-      echo PASS - ${IT} - $required_property
+    if echo -e "${error_output}" | grep -q -e $error_message ; then
+      echo -e ${GREEN} PASS ${NOCOLOR} - ${IT} - $required_property
     else
       examples_failed=1
-      echo FAIL - ${IT} - $required_property
+      echo -e ${RED} FAIL ${NOCOLOR} - ${IT} - $required_property
     fi
 }
 
@@ -250,10 +254,10 @@ test_locket_variable_extraction "locket-database-password" "locket_database_pass
 
 # "test framework" exit code matching/reporting
 if [[ "${examples_failed}" > 0 ]]; then
-  echo ${DESCRIBE} FAILED!
+  echo -e ${DESCRIBE} ${RED} FAILED! ${NOCOLOR}
   exit 1
 else
-  echo ${DESCRIBE} PASSED!
+  echo -e ${DESCRIBE} ${GREEN} PASSED! ${NOCOLOR}
   exit 0
 fi
 
