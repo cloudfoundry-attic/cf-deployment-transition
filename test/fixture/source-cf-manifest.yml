@@ -32,6 +32,8 @@ properties:
         secret: uaa-cc-routing-secret
       cc-service-dashboards:
         secret: uaa-cc-service-secret
+      cc_service_key_client:
+        secret: cc-service-key-secret
       cloud_controller_username_lookup:
         secret: uaa-cc-secret
       doppler:

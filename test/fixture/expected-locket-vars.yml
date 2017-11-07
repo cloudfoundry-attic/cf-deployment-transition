@@ -156,6 +156,7 @@ uaa_ca:
   private_key: uaa-ca-private-key
 uaa_clients_cc-routing_secret: uaa-cc-routing-secret
 uaa_clients_cc-service-dashboards_secret: uaa-cc-service-secret
+uaa_clients_cc_service_key_client_secret: cc-service-key-secret
 uaa_clients_cloud_controller_username_lookup_secret: uaa-cc-secret
 uaa_clients_doppler_secret: uaa-doppler-secret
 uaa_clients_gorouter_secret: uaa-router-secret

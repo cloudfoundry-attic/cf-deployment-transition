@@ -4,7 +4,7 @@ root_dir=$PWD/$(dirname $0)
 examples_failed=0
 
 DESCRIBE="When on the happy journey"
-  IT="makes a vars store from source manifests"
+  IT="makes a cf-deployment vars store from source manifests"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
@@ -22,7 +22,7 @@ DESCRIBE="When on the happy journey"
       fi
     popd > /dev/null
 
-  IT="when run without -N, makes a vars store from source manifests that does not include cf-networking vars"
+  IT="when run without -N, makes a cf-deployment vars store from source manifests that does not include cf-networking vars"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
@@ -40,7 +40,7 @@ DESCRIBE="When on the happy journey"
       fi
     popd > /dev/null
 
-  IT="makes a cf-networking vars store from source manifests"
+  IT="makes a cf-deployment vars store from source manifests with cf-networking enabled"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
@@ -59,7 +59,7 @@ DESCRIBE="When on the happy journey"
       fi
     popd > /dev/null
 
-  IT="makes a routing vars store from source manifests"
+  IT="makes a cf-deployment vars store from source manifests with routing enabled"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest-with-routing.yml \
@@ -78,7 +78,7 @@ DESCRIBE="When on the happy journey"
       fi
     popd > /dev/null
 
-  IT="makes a cf-networking and routing vars store from source manifests"
+  IT="makes a cf-deployment vars store from source manifests with cf-networking and routing enabled"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest-with-routing.yml \
@@ -98,7 +98,7 @@ DESCRIBE="When on the happy journey"
       fi
     popd > /dev/null
 
-  IT="makes a locket vars store from source manifests"
+  IT="makes a cf-deployment vars store from source manifests with locket enabled"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \
         -cf ${root_dir}/fixture/source-cf-manifest.yml \
