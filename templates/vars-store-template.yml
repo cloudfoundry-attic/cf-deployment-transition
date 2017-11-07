@@ -137,6 +137,7 @@ uaa_clients_routing_api_client_secret: (( merge ))
 uaa_clients_ssh-proxy_secret: (( merge ))
 uaa_clients_tcp_emitter_secret: (( merge ))
 uaa_clients_tcp_router_secret: (( merge ))
+uaa_clients_cc_service_key_client_secret: (( merge ))
 uaa_database_password: (( merge ))
 uaa_jwt_signing_key:
   private_key: (( merge ))
