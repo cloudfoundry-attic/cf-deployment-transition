@@ -4,7 +4,10 @@
   value: false
 
 - type: remove
-  path: /instance_groups/name=doppler/jobs/name=adapter
+  path: /instance_groups/name=doppler/jobs/name=adapter?
+
+- type: remove
+  path: /instance_groups/name=adapter?
 
 - type: remove
   path: /instance_groups/name=log-api/jobs/name=consul_agent/properties/consul/agent/services/reverse_log_proxy
