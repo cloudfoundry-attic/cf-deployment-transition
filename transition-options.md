@@ -110,14 +110,14 @@ which removes `syslog_drain_binder`.
 1. In the transition deployment, include:
     - `keep-etcd-for-transition.yml`
     - `enable-doppler-announce.yml`
-    - `keep-syslog_drain_binder-for-transition.yml`
+    - `keep-syslog-drain-binder-for-transition.yml`
     - optional: `rename-etcd-network.yml`
       (only if you've elected to use `cf-deployment/operations/rename-network.yml`)
 
 1. In the next deployment,
-omit only `enable-doppler-announce.yml` while keeping:
+omit both `enable-doppler-announce.yml` and
+`keep-syslog-drain-binder-for-transition.yml` while keeping:
     - `keep-etcd-for-transition.yml`
-    - `keep-syslog_drain_binder-for-transition.yml`
     - optional: `rename-etcd-network.yml`
       (only if you've elected to use `cf-deployment/operations/rename-network.yml`)
 
@@ -148,7 +148,7 @@ you'll remove `syslog_drain_binder`.
 1. In the initial transition deployment, include:
     - `keep-etcd-for-transition.yml`
     - `enable-doppler-announce.yml`
-    - `keep-syslog_drain_binder-for-transition.yml`
+    - `keep-syslog-drain-binder-for-transition.yml`
     - `opt-out-of-cf-syslog-drain-release-for-transition.yml`
     - optional: `rename-etcd-network.yml`
       (only if you've elected to use `cf-deployment/operations/rename-network.yml`)
@@ -157,14 +157,14 @@ you'll remove `syslog_drain_binder`.
 omit only `opt-out-of-cf-syslog-drain-release-for-transition.yml` while keeping:
     - `keep-etcd-for-transition.yml`
     - `enable-doppler-announce.yml`
-    - `keep-syslog_drain_binder-for-transition.yml`
+    - `keep-syslog-drain-binder-for-transition.yml`
     - optional: `rename-etcd-network.yml`
       (only if you've elected to use `cf-deployment/operations/rename-network.yml`)
 
 1. In the next deployment,
-omit only `enable-doppler-announce.yml` while keeping:
+omit both `enable-doppler-announce.yml`
+and `keep-syslog-drain-binder-for-transition.yml` while keeping:
     - `keep-etcd-for-transition.yml`
-    - `keep-syslog_drain_binder-for-transition.yml`
     - optional: `rename-etcd-network.yml`
       (only if you've elected to use `cf-deployment/operations/rename-network.yml`)
 
