@@ -17,7 +17,8 @@ The included tools are:
 of `etcd`
 to cf-deployment
 for the purpose of transition.
-This opsfile also holds `etcd` at a static IP address.
+This opsfile pins loggregator to version 99.x and
+also holds `etcd` at a static IP address.
 Deployers must provide the IP address.
 - `enable-doppler-announce.yml`: Configures `doppler`
 to announce presence via etcd.

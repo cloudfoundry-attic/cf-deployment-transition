@@ -131,3 +131,11 @@
     sha1: 670bf17cea0e6e56bdac33956545b3e302062521
     url: https://bosh.io/d/github.com/cloudfoundry-incubator/etcd-release?v=117
     version: "117"
+
+- type: replace
+  path: /releases/name=loggregator?
+  value:
+    name: loggregator
+    sha1: 2080e1e0594591dafa716c69f207eb29929bce3d
+    url: https://bosh.io/d/github.com/cloudfoundry/loggregator-release?v=99
+    version: "99"
