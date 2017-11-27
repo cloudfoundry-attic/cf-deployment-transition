@@ -1,13 +1,6 @@
 # Transition
 ### [Step-by-step guide](how-to-transition.md) to transitioning from `cf-release` to `cf-deployment`
 
-**The tools in this repo
-have not been tested
-in any production transitions
-and is still under active development.
-We'll update this section when the transition
-has been sufficiently tested.**
-
 This repo contains tools for migrating
 from [cf-release](https://github.com/cloudfoundry/cf-release)
 to [cf-deployment](https://github.com/cloudfoundry/cf-deployment).
