@@ -1,7 +1,7 @@
 ---
 # For the migration, restore doppler's behavior of announcing themselves via etcd
 - type: replace
-  path: /instance_groups/name=doppler/jobs/name=doppler/properties/doppler/disable_announce?
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/doppler?/disable_announce
   value: false
 
 - type: replace
