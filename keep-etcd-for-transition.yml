@@ -63,6 +63,14 @@
             client_key: "((etcd_client.private_key))"
 
 - type: replace
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/doppler?/disable_announce
+  value: true
+
+- type: replace
+  path: /instance_groups/name=doppler/jobs/name=doppler/properties/loggregator/disable_syslog_drains?
+  value: true
+
+- type: replace
   path: /variables/name=etcd_ca?
   value:
     name: etcd_ca
