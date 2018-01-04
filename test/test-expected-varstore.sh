@@ -63,6 +63,25 @@ DESCRIBE="When on the happy journey"
       fi
     popd > /dev/null
 
+  IT="makes a cf-deployment vars store from source manifests without routing_api_client"
+    pushd $(mktemp -d) > /dev/null
+      ${root_dir}/../extract-vars-store-from-manifests.sh \
+        -cf ${root_dir}/fixture/source-cf-manifest-with-routing-without-routing-api-client.yml \
+        -d  ${root_dir}/fixture/source-diego-manifest.yml \
+        -ca ${root_dir}/fixture/ca-private-keys.yml \
+        -r > /dev/null
+
+      diff -wB -C5 ${root_dir}/fixture/expected-routing-vars-without-routing-api-client.yml deployment-vars.yml
+      status=$?
+
+      if [ "$status" == "0" ]; then
+        echo -e ${GREEN} PASS ${NOCOLOR} - ${IT}
+      else
+        echo -e ${RED} FAIL ${NOCOLOR} - ${IT}
+        examples_failed=1
+      fi
+    popd > /dev/null
+
   IT="makes a cf-deployment vars store from source manifests with routing enabled"
     pushd $(mktemp -d) > /dev/null
       ${root_dir}/../extract-vars-store-from-manifests.sh \

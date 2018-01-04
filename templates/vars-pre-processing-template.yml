@@ -220,7 +220,7 @@ properties:
       gorouter:
         secret: (( merge || nil ))
       routing_api_client:
-        secret: (( merge ))
+        secret: (( merge || nil ))
       ssh-proxy:
         secret: (( merge || nil ))
       tcp_emitter:

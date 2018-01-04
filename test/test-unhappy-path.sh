@@ -180,7 +180,6 @@ function test_routing_deployment_variable_extraction() {
 
 test_routing_deployment_variable_extraction "uaa-emitter-secret" "uaa_clients_tcp_emitter_secret"
 test_routing_deployment_variable_extraction "uaa-tcp-secret" "uaa_clients_tcp_router_secret"
-test_routing_deployment_variable_extraction "uaa-routing-api-secret" "uaa_clients_routing_api_client_secret"
 
 CONTEXT="CF networking private keys"
   missing_a_private_key=$(mktemp)
