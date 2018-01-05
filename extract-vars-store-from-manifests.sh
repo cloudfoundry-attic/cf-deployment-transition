@@ -200,19 +200,20 @@ spiff_it() {
 
   escaped_cf_manifest=$(mktemp)
   $SCRIPT_DIR/util/spiff-escape.sh ${CF_MANIFEST} > ${escaped_cf_manifest}
-  spiff merge \
-  $MERGE_TEMPLATES \
-  $SCRIPT_DIR/templates/vars-ca-template.yml \
-  $escaped_cf_manifest \
-  $DIEGO_MANIFEST \
-  $CA_KEYS \
-  $uaa_jwt_spiff_template
+
+  $SCRIPT_DIR/util/remove-keys-with-null-values.sh \
+    <(spiff merge \
+    $MERGE_TEMPLATES \
+    $SCRIPT_DIR/templates/vars-ca-template.yml \
+    $escaped_cf_manifest \
+    $DIEGO_MANIFEST \
+    $CA_KEYS \
+    $uaa_jwt_spiff_template)
 }
 
 handle_spiff_errors() {
   set +e
   spiff_temp_output=$(mktemp)
-  # spiff_it > /dev/null
   spiff_it 1> /dev/null 2> $spiff_temp_output
   set -e
   echo $spiff_temp_output
