@@ -37,6 +37,11 @@ from cf-deployment.  Intended to be used in conjunction with `keep-syslog-drain-
 to continue using syslog drain
 while minimizing the number of duplicate messages logged
 during the transition deployments.
+- `migrate-webdav.yml`: Migrates the webdav
+`blobstore_z1` instance_group
+of cf-release
+to the `singleton-blobstore` instance_group
+of cf-deployment.
 
 ## Tools
 
