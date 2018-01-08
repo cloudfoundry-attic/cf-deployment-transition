@@ -28,6 +28,14 @@ your internal `webdav` blobstore,
 apply the `migrate-webdav.yml` opsfile
 in the same deployments
 as you apply the `cfr-to-cfd.yml` opsfile.
+If you have customized
+the name of the directory keys
+for your blobstore, please also use the
+`cf-deployment/operations/legacy/keep-original-blobstore-directory-keys.yml` opsfile
+to maintain those keys.
+
+**NOTE** you must use this opsfile in perpetuity -
+not just for the transition.
 Make sure **NOT** to use the `use-s3-blobstore.yml` opsfile
 from `cf-deployment`.
 
