@@ -137,7 +137,7 @@ or higher of the `bosh` cli
   `diego-release` on AWS.
 - You've got TLS enabled and configured correctly
   (this is discussed in some length in the next section)
-- Your databases and blobstores are external to your cf-release deployment
+- Your databases are external to your cf-release deployment
   (for example, your database could be in a separate database deployment, or a service like RDS).
 - You will likely need
   to create a new database
@@ -199,8 +199,6 @@ as long as all members of the sub-lists share CAs.
   - consul_agent
 - service_cf_internal_ca
   - blobstore_tls
-  (if using an internal blobstore,
-  which this tool does not currently support)
   - diego_auctioneer_client
   - diego_auctioneer_server
   - diego_bbs_server
@@ -220,17 +218,17 @@ as long as all members of the sub-lists share CAs.
   - uaa_ssl
   - uaa_login_saml
 
-### Required Database and Blobstore Configuration
+### Required Database Configuration
 The tools in this repo assume that
-production deployers are not using the dev/test datastores
-like postgres or WebDAV
+production deployers are not using the dev/test
+postgres database
 provided by cf-release,
-and that they instead use externally provided datastores
-such as RDS and S3.
+and that they instead use an externally provided database
+such as RDS.
 Correspondingly,
 it requires that deployers use
-the `use-external-dbs.yml` and `use-s3-blobstore.yml` ops files.
-Those ops files require a number of variables
+the `use-external-dbs.yml` ops file.
+This ops file requires a number of variables
 be provided in vars-files,
 as [documented][cf-d-ops-files-list] in the `cf-deployment` readme.
 

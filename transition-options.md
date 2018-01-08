@@ -10,9 +10,26 @@ regarding when and how to introduce
 the new CF components that cf-deployment
 comprises.
 
+- [Decide How to Handle your Blobstore](#blobstore)
 - [Decide How to Handle the Routing Release](#routing-release)
 - [Decide How to Handle the CF Networking Release](#cf-networking-release)
 - [Decide How to Handle the Application Syslog Drain Infrastructure](#syslog-drain)
+
+## <a id="blobstore"></a> Decide How to Handle your Blobstore
+
+`cf-release` ships with a `webdav` blobstore
+by default, as does `cf-deployment`.
+Many production deployers
+have chosen to use external blobstores
+such as `s3`.
+This transition tooling supports both.
+In order to migrate
+your internal `webdav` blobstore,
+apply the `migrate-webdav.yml` opsfile
+in the same deployments
+as you apply the `cfr-to-cfd.yml` opsfile.
+Make sure **NOT** to use the `use-s3-blobstore.yml` opsfile
+from `cf-deployment`.
 
 ## <a id="routing-release"></a> Decide How to Handle the Routing Release
 
