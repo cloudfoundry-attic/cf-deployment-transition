@@ -37,6 +37,11 @@ from cf-deployment.  Intended to be used in conjunction with `keep-syslog-drain-
 to continue using syslog drain
 while minimizing the number of duplicate messages logged
 during the transition deployments.
+- `migrate-postgres.yml`: Migrates the
+`postgres_z1` instance_group
+of cf-release
+to the `database` instance_group
+of cf-deployment.
 - `migrate-webdav.yml`: Migrates the webdav
 `blobstore_z1` instance_group
 of cf-release
@@ -219,18 +224,23 @@ as long as all members of the sub-lists share CAs.
   - uaa_login_saml
 
 ### Required Database Configuration
-The tools in this repo assume that
-production deployers are not using the dev/test
-postgres database
-provided by cf-release,
-and that they instead use an externally provided database
-such as RDS.
-Correspondingly,
-it requires that deployers use
-the `use-external-dbs.yml` ops file.
+The tools in this repo assume
+that production deployers are using an external database service,
+such as RDS,
+or a BOSH-deployed Postgres.
+
+Deployers using an external database service
+must use the `use-external-dbs.yml` ops file.
 This ops file requires a number of variables
 be provided in vars-files,
 as [documented][cf-d-ops-files-list] in the `cf-deployment` readme.
+
+Deployers using a BOSH-deployed Postgres
+must use the `use-postgres.yml` ops file
+to build the target `cf-deployment` manifest.
+During the transition deploy
+they must also use the `cf-deployment-transition/migrate-postgres.yml` ops-file
+to ensure their data is transferred to the new instance.
 
 #### New databases
 If you haven't already deployed the Routing API,
