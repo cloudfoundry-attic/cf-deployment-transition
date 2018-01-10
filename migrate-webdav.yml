@@ -3,3 +3,7 @@
   path: /instance_groups/name=singleton-blobstore/migrated_from?
   value:
     - {name: blobstore_z1, az: z1}
+
+- type: replace
+  path: /instance_groups/name=singleton-blobstore/update?/serial
+  value: true
