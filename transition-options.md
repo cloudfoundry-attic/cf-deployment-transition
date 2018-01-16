@@ -11,9 +11,48 @@ the new CF components that cf-deployment
 comprises.
 
 - [Decide How to Handle your Blobstore](#blobstore)
+- [Decide How to Handle your Database](#database)
 - [Decide How to Handle the Routing Release](#routing-release)
 - [Decide How to Handle the CF Networking Release](#cf-networking-release)
 - [Decide How to Handle the Application Syslog Drain Infrastructure](#syslog-drain)
+
+## <a id="database"></a> Decide How to Handle your Database
+
+`cf-release` ships with a `postgres` database
+by default.
+Many production deployers
+have chosen to use external databases
+such as `rds`.
+This transition tooling supports both.
+In order to migrate
+your internal `postgres` database,
+apply the `migrate-postgres.yml` opsfile
+in the same deployments
+as you apply the `cfr-to-cfd.yml` opsfile.
+
+Before you transition you must modify
+the cloud-config
+on your BOSH director
+to _exclude_ the IP address
+of the `postgres_z1` node
+from the `static_ip` range
+of your network config.
+
+You must also apply the `cf-deployment/operations/use-postgres.yml`
+opsfile to configure `cf-deployment`
+to use `postgres` in all deployments
+of `cf-deployment`.
+
+Since the database usernames and
+database names are different
+between `cf-release` and `cf-deployment`,
+you must also apply the `cf-deployment/operations/legacy/keep-original-postgres-configuration.yml`.
+
+**NOTE** you must use the legacy opsfile AND the `use-postgres.yml`
+opsfile in perpetuity - not just for the transition.
+Make sure **NOT** to use the `use-external-dbs.yml` opsfile
+from `cf-deployment`.
+
 
 ## <a id="blobstore"></a> Decide How to Handle your Blobstore
 

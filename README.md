@@ -143,7 +143,9 @@ or higher of the `bosh` cli
 - You've got TLS enabled and configured correctly
   (this is discussed in some length in the next section)
 - Your databases are external to your cf-release deployment
-  (for example, your database could be in a separate database deployment, or a service like RDS).
+  or you are using the integrated `postgres` job.
+- Your blobstore is external to your cf-release deployment
+  or you are using the integrated `blobstore` job.
 - You will likely need
   to create a new database
   for the Routing API,
