@@ -1,0 +1,5 @@
+---
+- type: replace
+  path: /instance_groups/name=haproxy/migrated_from?
+  value:
+    - {name: ha_proxy_z1, az: z1}
