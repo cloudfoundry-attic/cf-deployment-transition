@@ -10,11 +10,51 @@ regarding when and how to introduce
 the new CF components that cf-deployment
 comprises.
 
+- [Are you using HAProxy?](#haproxy)
 - [Decide How to Handle your Blobstore](#blobstore)
 - [Decide How to Handle your Database](#database)
 - [Decide How to Handle the Routing Release](#routing-release)
 - [Decide How to Handle the CF Networking Release](#cf-networking-release)
 - [Decide How to Handle the Application Syslog Drain Infrastructure](#syslog-drain)
+
+## <a id="haproxy"></a> Are you using HAProxy?
+
+`cf-release` ships with an optional `haproxy`
+that can be used as a singleton load-balancer
+for the entire deployment.
+This is common in
+vSphere or OpenStack deployments
+as they do not offer load-balancers
+built-in.
+If you have chosen this path
+and wish to migrate your `haproxy`
+to `cf-deployment`,
+apply the `migrate-haproxy.yml` opsfile
+in the same deployments
+as you apply the `cfr-to-cfd.yml` opsfile.
+
+Before you transition you must modify
+the cloud-config
+on your BOSH director
+to _exclude_ the IP address
+of the `router`
+and `ha_proxy_z1` nodes
+from the `static_ip` range
+of your network config.
+
+You must also apply the `cf-deployment/operations/use-haproxy.yml`
+opsfile to configure `cf-deployment`
+to use `haproxy` in all deployments
+of cf-deployment.
+
+If you want to keep
+the same SSL certificate
+that you used in `cf-release`
+for your `haproxy`,
+you must also apply the `cf-deployment/operations/legacy/keep-haproxy-ssl-pem.yml`.
+
+**NOTE** you must use the legacy opsfile AND the `use-haproxy.yml`
+opsfile in perpetuity - not just for the transition.
 
 ## <a id="database"></a> Decide How to Handle your Database
 

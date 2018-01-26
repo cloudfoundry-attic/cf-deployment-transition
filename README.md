@@ -47,6 +47,10 @@ of cf-deployment.
 of cf-release
 to the `singleton-blobstore` instance_group
 of cf-deployment.
+- `migrate-haproxy.yml`: Migrates the `ha_proxy_z1` instance_group
+of cf-release
+to the `haproxy` instance_group
+of cf-deployment.
 
 ## Tools
 

@@ -3,3 +3,9 @@
   path: /instance_groups/name=haproxy/migrated_from?
   value:
     - {name: ha_proxy_z1, az: z1}
+
+- type: remove
+  path: /instance_groups/name=haproxy/jobs/name=haproxy/properties/ha_proxy/backend_ssl
+
+- type: remove
+  path: /instance_groups/name=haproxy/jobs/name=haproxy/properties/ha_proxy/backend_port
