@@ -4,6 +4,10 @@
 This repo contains tools for migrating
 from [cf-release](https://github.com/cloudfoundry/cf-release)
 to [cf-deployment](https://github.com/cloudfoundry/cf-deployment).
+
+> **Notice**: cf-release is now end-of-life. The final version of cf-release is `v287`.
+> We will not cut any new releases.
+
 The included tools are:
 - `extract-vars-store-from-manifests.sh`: Extracts credentials from your existing deployment manifests
   to build a vars-store for cf-deployment.
@@ -143,7 +147,7 @@ or higher of the `bosh` cli
 - You have existing deployments of
   `cf-release`
   and
-  `diego-release` on AWS.
+  `diego-release`.
 - You've got TLS enabled and configured correctly
   (this is discussed in some length in the next section)
 - Your databases are external to your cf-release deployment
@@ -168,13 +172,6 @@ or higher of the `bosh` cli
 The following sections discuss these prerequisites
 and their relationships to our tools
 in more depth.
-
-Our tests and tooling
-assume you are migrating an AWS environment.
-**If you have a different IaaS in production
-and you'd like to migrate it,
-we'd love to hear from you!
-Please open an issue describing your situation.**
 
 ### Required TLS Certificate Topology
 `cf-deployment` enables TLS validation
