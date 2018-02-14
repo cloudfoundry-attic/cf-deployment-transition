@@ -2,11 +2,10 @@
 ### [Step-by-step guide](how-to-transition.md) to transitioning from `cf-release` to `cf-deployment`
 
 This repo contains tools for migrating
-from [cf-release](https://github.com/cloudfoundry/cf-release)
+from [cf-release](https://github.com/cloudfoundry-attic/cf-release)
 to [cf-deployment](https://github.com/cloudfoundry/cf-deployment).
 
 > **Notice**: cf-release is now end-of-life. The final version of cf-release is `v287`.
-> We will not cut any new releases.
 
 The included tools are:
 - `extract-vars-store-from-manifests.sh`: Extracts credentials from your existing deployment manifests
