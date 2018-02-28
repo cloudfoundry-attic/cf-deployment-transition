@@ -178,7 +178,7 @@ silk_controller:
 uaa_clients_network_policy_secret: (( properties.cf_networking.policy_server.uaa_client_secret ))
 jobs:
 - name: database_z1
-  properties: (( merge ))
+  properties: (( merge || nil ))
 properties:
   app_ssh:
     host_key_fingerprint: (( merge || nil ))
