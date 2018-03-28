@@ -80,11 +80,19 @@ or other issues.
 
 ## <a id="transition-options"></a> Step 2: Choosing transition options
 
-Determine which
-optional opsfiles
-you need to include
-based on your requirements:
-[Transition Options](transition-options.md)
+Deployments differ from each other widely,
+so documenting a single transition process isn't exactly feasible.
+Each for a given setup of cf-release,
+there are a few different choices for how to transition.
+Please read through our list of [Transition Options](transition-options.md)
+to understand what you'll need to do,
+based on your particular deployment's requirements.
+You'll find information about handling things like:
+- [Different blobstores](https://github.com/cloudfoundry/cf-deployment-transition/blob/master/transition-options.md#blobstore)
+- [Different databases (postgres vs external databases)](https://github.com/cloudfoundry/cf-deployment-transition/blob/master/transition-options.md#database)
+- A separate routing deployment
+- HAProxy instead of IaaS-provided load balancers
+- Previously optional features like CF Networking or application syslog deployments
 
 ## <a id="transition-deployment"></a> Step 3: Deploying with necessary opsfiles
 
@@ -110,45 +118,19 @@ In `cf-deployment`:
 | [`operations/legacy/keep-original-internal-usernames.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/legacy/keep-original-internal-usernames.yml) | Maintains operator-provided usernames. | Provides ability to set (String) values for `properties.nats.user`, `properties.cc.staging_upload_user`, `properties.router.status.user` |
 | [`operations/set-bbs-active-key.yml`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/set-bbs-active-key.yml) | Maintains current `bbs` active encryption key. | Sets the active key label to the value of `diego_bbs_active_key_label`, which is extracted from the `diego-release`-based manifest in step 1. |
 
-We will assume for
-this guide
-that you are deploying to `aws`,
-using `s3` for your blobstore,
-and using `rds` for your databases.
-To enable these features
-with `cf-deployment`,
-the opsfiles needed are
-`aws.yml`, `use-s3-blobstore.yml`, and `use-external-dbs.yml`
-(see [opsfile documentation](https://github.com/cloudfoundry/cf-deployment/tree/master/operations#ops-files)).
-Also of note is that `cf-deployment`
-has one required variable: `system_domain`.
 
-(For other IaaSes
-and datastore setups,
-you'll need to use other ops-files,
-or potentially write your own,
-to achieve similar changes.
-cf-deployment includes ops-files
-for [Azure](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/aws.yml)
-and [Openstack](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/openstack.yml),
-while GCP and vSphere work without any ops-files.
-Whatever your blobstore and database solutions are,
-be sure to account for those as well.)
-
-A typical transition deployment `bosh deploy` command looks like:
+For example,
+in a deployment of cf-release to AWS that uses S3 and RDS as its datastores,
+you could expect the `bosh deploy` command to look like this:
 ```
 bosh deploy -d cf \
 -v system_domain=your.system.domain \
 --vars-store=deployment-vars.yml \
 -o cf-deployment/operations/aws.yml \
--o cf-deployment/operations/use-external-dbs.yml \
--l rds-vars.yml \
--o cf-deployment/operations/use-s3-blobstore.yml \
--l s3-vars.yml \
--o cf-deployment/operations/legacy/keep-static-ips.yml \
--l static-ip-vars.yml \
--o cf-deployment-transition/keep-etcd-for-transition.yml \
--l etcd-ips.yml \
+-o cf-deployment/operations/use-external-dbs.yml -l rds-vars.yml \
+-o cf-deployment/operations/use-s3-blobstore.yml -l s3-vars.yml \
+-o cf-deployment/operations/legacy/keep-static-ips.yml -l static-ip-vars.yml \
+-o cf-deployment-transition/keep-etcd-for-transition.yml -l etcd-ips.yml \
 -o cf-deployment/operations/set-bbs-active-key.yml \
 -o cf-deployment-transition/cfr-to-cfd.yml \
 cf-deployment/cf-deployment.yml
