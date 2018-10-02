@@ -1,5 +1,13 @@
 # How to transition
 
+## Notices: 
+- cf-release is now end-of-life. The final version of cf-release is `v287`.
+- this transition repo supports migrating to early releases of cf-deployment and from there, you must upgrade your foundation to get to the latest version of cf-d.
+  - [Please view the compatibility matrix](https://github.com/cloudfoundry/cf-deployment-transition-compatibility/blob/master/transition-compatibility.csv).
+- cf-deployment-transition is no longer actively managed or supported.
+
+******************************
+
 This document is designed
 to guide a deployer
 through a transition
@@ -9,11 +17,6 @@ For additional details
 about the transition in general,
 consult the [README](README.md)
 
-Please feel free
-to reach out to us for assistance
-on Slack
-in the `#cf-deployment` channel
-at https://cloudfoundry.slack.com.
 
 0. [Satisfying prerequisites](#prerequisites)
 1. [Extracting the `vars-store`](#vars-store-extraction)
